@@ -1,0 +1,29 @@
+<div class="container">
+  <h3>Cascading Drop-down Lists</h3>
+  <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+    <div class="form-group">
+      <label class="control-label">Category</label>
+      <span class="glyphicon glyphicon-refresh glyphicon-spin spinner" *ngIf="categories.length == 0"></span>
+      <select class="form-control" name="categoryCtrl" #categoryCtrl (change)="fetchProducts(categoryCtrl.value)"
+        [(ngModel)]="model.categoryId">
+        <option value="undefined">Select a Category...</option>
+        <option *ngFor="let category of categories" value="{{category.categoryId}}">
+          {{ category.categoryName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Product</label>
+      <span class="glyphicon glyphicon-refresh glyphicon-spin spinner" *ngIf="isLoadingProducts"></span>
+      <select class="form-control" name="productCtrl" [(ngModel)]="model.productId">
+        <option value="undefined">Select a Product...</option>
+        <option *ngFor="let product of products" value="{{product.productId}}">
+          {{ product.productName }}
+        </option>
+      </select>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Submit</button>
+  </form>
+</div>

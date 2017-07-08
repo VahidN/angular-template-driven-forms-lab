@@ -1,0 +1,29 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" [routerLink]="['/']">{{title}}</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li dropdown>
+        <a href dropdownToggle class="dropdown-toggle" (click)="false">
+            Samples <span class="caret"></span>
+        </a>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem" routerLinkActive="active">
+            <a class="dropdown-item" [routerLink]="['/register']">Register / Template driven form</a>
+          </li>
+          <li role="menuitem" routerLinkActive="active">
+            <a class="dropdown-item" [routerLink]="['/productCascadingList']">Cascading Drop-downs</a>
+          </li>
+          <li role="menuitem" routerLinkActive="active">
+            <a class="dropdown-item" [routerLink]="['/confirmPassword']">Confirm Password Validator</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,77 @@
+<div class="container">
+  <h3>Registration Form</h3>
+  <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+    <div class="form-group" [class.has-error]="username.invalid && username.touched">
+      <label class="control-label">User Name</label>
+      <input #username="ngModel" required maxlength="8" minlength="4" type="text"
+        class="form-control" name="username" [(ngModel)]="model.username">
+      <div *ngIf="username.invalid && username.touched">
+        <div class="alert alert-info">
+          errors: {{ username.errors | json }}
+        </div>
+        <div class="alert alert-danger"  *ngIf="username.errors.required">
+          username is required.
+        </div>
+        <div class="alert alert-danger"  *ngIf="username.errors.minlength">
+          username should be minimum {{username.errors.minlength.requiredLength}} characters.
+        </div>
+        <div class="alert alert-danger"  *ngIf="username.errors.maxlength">
+          username should be max {{username.errors.maxlength.requiredLength}} characters.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="email.invalid && email.touched">
+      <label class="control-label">Email</label>
+      <input #email="ngModel" required appEmailValidator type="text" class="form-control"
+        name="email" [(ngModel)]="model.email">
+      <div *ngIf="email.invalid && email.touched">
+        <div class="alert alert-info">
+          errors: {{ email.errors | json }}
+        </div>
+        <div class="alert alert-danger"  *ngIf="email.errors.required">
+          email is required.
+        </div>
+        <div class="alert alert-danger"  *ngIf="email.errors.appEmailValidator">
+          The entered email is not valid.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="password.invalid && password.touched">
+      <label class="control-label">Password</label>
+      <input #password="ngModel" required type="password" class="form-control"
+        appValidateEqual compare-to="confirmPassword" name="password" [(ngModel)]="model.password">
+      <div *ngIf="password.invalid && password.touched">
+        <div class="alert alert-info">
+          errors: {{ password.errors | json }}
+        </div>
+        <div class="alert alert-danger"  *ngIf="password.errors.required">
+          password is required.
+        </div>
+        <div class="alert alert-danger"  *ngIf="password.errors.appValidateEqual">
+          Password mismatch. Please complete the confirmPassword .
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" [class.has-error]="confirmPassword.invalid && confirmPassword.touched">
+      <label class="control-label">Retype password</label>
+      <input #confirmPassword="ngModel" required type="password" class="form-control"
+        appValidateEqual compare-to="password" name="confirmPassword" [(ngModel)]="model.confirmPassword">
+      <div *ngIf="confirmPassword.invalid && confirmPassword.touched">
+        <div class="alert alert-info">
+          errors: {{ confirmPassword.errors | json }}
+        </div>
+        <div class="alert alert-danger"  *ngIf="confirmPassword.errors.required">
+          confirmPassword is required.
+        </div>
+        <div class="alert alert-danger"  *ngIf="confirmPassword.errors.appValidateEqual">
+          Password mismatch.
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Ok</button>
+  </form>
+</div>

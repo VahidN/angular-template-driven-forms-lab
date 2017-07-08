@@ -1,0 +1,87 @@
+<h3 *ngIf="languages.length == 0">Loading...</h3>
+<div class="container" *ngIf="languages.length > 0">
+  <h3>Employee Form</h3>
+  <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+    <div class="form-group" [class.has-error]="firstName.invalid && firstName.touched">
+      <label class="control-label">First Name</label>
+      <input #firstName="ngModel" #firstNameElement required maxlength="5" minlength="2" pattern="^V.*" type="text" class="form-control"
+        name="firstName" [(ngModel)]="model.firstName">
+      <div *ngIf="firstName.invalid && firstName.touched">
+        <div class="alert alert-info">
+          errors: {{ firstName.errors | json }}
+        </div>
+        <div class="alert alert-danger"  *ngIf="firstName.errors.required">
+          Name is required.
+        </div>
+        <div class="alert alert-danger"  *ngIf="firstName.errors.minlength">
+          Name should be minimum {{firstName.errors.minlength.requiredLength}} characters.
+        </div>
+        <div class="alert alert-danger"  *ngIf="firstName.errors.maxlength">
+          Name should be max {{firstName.errors.maxlength.requiredLength}} characters.
+        </div>
+        <div class="alert alert-danger"  *ngIf="firstName.errors.pattern">
+          Name pattern: {{firstName.errors.pattern.requiredPattern}}
+        </div>
+      </div>
+    </div>
+
+    <h4>className: {{ firstNameElement.className }}</h4>
+    <h4>dirty: {{ firstName.dirty }}</h4>
+    <h4>invalid: {{ firstName.invalid }}</h4>
+
+    <!--
+        <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" name="firstName"
+                [ngModel]="model.firstName"
+                (ngModelChange)="firstNameToUpperCase($event)">
+        </div>
+    -->
+
+    <div class="form-group">
+      <label>Last Name</label>
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName">
+    </div>
+
+    <div class="checkbox">
+      <label>
+            <input type="checkbox" name="is-full-time"
+                   [(ngModel)]="model.isFullTime"> Full Time Employee
+            </label>
+    </div>
+
+    <label>Payment Type</label>
+    <div class="radio">
+      <label>
+            <input type="radio" name="paymentType" value="FullTime" checked
+                   [(ngModel)]="model.paymentType">
+                Full Time
+            </label>
+    </div>
+    <div class="radio">
+      <label>
+            <input type="radio" name="paymentType" value="PartTime"
+                   [(ngModel)]="model.paymentType">
+                Part Time
+            </label>
+    </div>
+
+    <div class="form-group" [class.has-error]="hasPrimaryLanguageError">
+      <label class="control-label">Primary Language</label>
+      <select class="form-control" name="primaryLanguage" #primaryLanguage (blur)="validatePrimaryLanguage(primaryLanguage.value)"
+        (change)="validatePrimaryLanguage(primaryLanguage.value)" [(ngModel)]="model.primaryLanguage">
+          <option value="default">Select a Language...</option>
+          <option *ngFor="let lang of languages">
+            {{ lang }}
+          </option>
+      </select>
+    </div>
+
+
+    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Ok</button>
+  </form>
+  Model: {{ model | json }}
+  <br> Angular: {{ form.value | json }}
+  <br> form.pristine: {{ form.pristine }}
+  <br> form.valid: {{ form.valid }}
+</div>
