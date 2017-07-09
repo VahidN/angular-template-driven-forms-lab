@@ -16,6 +16,7 @@ import { AppErrorHandler } from "./app.error-handler";
 
 import { BsDropdownModule } from "ngx-bootstrap";
 import { CustomValidatorsModule } from "./custom-validators/custom-validators.module";
+import { UploadFileModule } from "./upload-file/upload-file.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -28,6 +29,7 @@ import { CustomValidatorsModule } from "./custom-validators/custom-validators.mo
     EmployeeModule,
     ProductModule,
     CustomValidatorsModule,
+    UploadFileModule,
     AppRoutingModule
   ],
   providers: [{ provide: ErrorHandler, useClass: AppErrorHandler }],

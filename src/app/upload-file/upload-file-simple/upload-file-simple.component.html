@@ -1,0 +1,23 @@
+<div class="container">
+  <h3>Support Form</h3>
+  <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+    <div class="form-group" [class.has-error]="description.invalid && description.touched">
+      <label class="control-label">Description</label>
+      <input #description="ngModel" required type="text" class="form-control"
+        name="description" [(ngModel)]="model.description">
+      <div *ngIf="description.invalid && description.touched">
+        <div class="alert alert-danger"  *ngIf="description.errors.required">
+          description is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Screenshot(s)</label>
+      <input #screenshotInput required type="file" multiple (change)="fileChange($event)"
+        class="form-control" name="screenshot">
+    </div>
+
+    <button class="btn btn-primary" [disabled]="form.invalid" type="submit">Ok</button>
+  </form>
+</div>
