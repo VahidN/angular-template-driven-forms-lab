@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AngularTemplateDrivenFormsLab.Models;
+using System;
 
 namespace AngularTemplateDrivenFormsLab.Controllers
 {
@@ -19,6 +20,19 @@ namespace AngularTemplateDrivenFormsLab.Controllers
         {
             string[] languages = { "Persian", "English", "Spanish", "Other" };
             return Ok(languages);
+        }
+
+        [HttpPost("[action]")]
+        [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult CheckUser([FromBody] Employee model)
+        {
+            var remoteValidationResult = new { result = true, message = $"{model.FirstName} is fine!" };
+            if (model.FirstName?.Equals("Vahid", StringComparison.OrdinalIgnoreCase) ?? false)
+            {
+                remoteValidationResult = new { result = false, message = "username:`Vahid` is already taken." };
+            }
+
+            return Json(remoteValidationResult);
         }
     }
 }

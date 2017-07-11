@@ -4,7 +4,12 @@
     <div class="form-group" [class.has-error]="username.invalid && username.touched">
       <label class="control-label">User Name</label>
       <input #username="ngModel" required maxlength="8" minlength="4" type="text"
-        class="form-control" name="username" [(ngModel)]="model.username">
+        appRemoteValidator [remote-url]="remoteUsernameValidationUrl" remote-field="FirstName"
+        remote-additional-fields="email,password" class="form-control" name="username"
+        [(ngModel)]="model.username">
+      <div *ngIf="username.pending" class="alert alert-warning">
+        Checking server, Please wait ...
+      </div>
       <div *ngIf="username.invalid && username.touched">
         <div class="alert alert-info">
           errors: {{ username.errors | json }}
@@ -17,6 +22,9 @@
         </div>
         <div class="alert alert-danger"  *ngIf="username.errors.maxlength">
           username should be max {{username.errors.maxlength.requiredLength}} characters.
+        </div>
+        <div class="alert alert-danger"  *ngIf="username.errors.remoteValidation">
+          {{username.errors.remoteValidation.remoteValidationMessage}}
         </div>
       </div>
     </div>

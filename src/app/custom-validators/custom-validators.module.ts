@@ -6,13 +6,15 @@ import { CustomValidatorsRoutingModule } from "./custom-validators-routing.modul
 import { UserRegisterComponent } from "./user-register/user-register.component";
 import { EqualValidatorDirective } from "./equal-validator.directive";
 import { EmailValidatorDirective } from "./email-validator.directive";
+import { RemoteValidatorDirective } from "./remote-validator.directive";
 
 @NgModule({
   imports: [CommonModule, FormsModule, CustomValidatorsRoutingModule],
   declarations: [
     UserRegisterComponent,
     EqualValidatorDirective,
-    EmailValidatorDirective
+    EmailValidatorDirective,
+    RemoteValidatorDirective
   ]
 })
 export class CustomValidatorsModule {}

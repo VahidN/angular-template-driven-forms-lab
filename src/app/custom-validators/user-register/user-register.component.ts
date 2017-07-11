@@ -8,6 +8,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./user-register.component.css"]
 })
 export class UserRegisterComponent implements OnInit {
+  remoteUsernameValidationUrl = "api/Employee/CheckUser";
   model = new User();
 
   constructor() {}

@@ -15,7 +15,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to send ASP.NET Core's anti-forgery token cookies to an Angular app and how to automatically validate it on the server.
 - How to complete the `.vscode/launch.json` file to allow debugging of the `Angular CLI` project using `VSCode` and `Chrome debugger plugin`.
 - How to upload files to the server without using any third-party plugins.
-
+- How to perform remote validation with template driven forms.
 
 
 How to run it
