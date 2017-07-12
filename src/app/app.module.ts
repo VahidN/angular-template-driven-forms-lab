@@ -18,6 +18,8 @@ import { BsDropdownModule } from "ngx-bootstrap";
 import { CustomValidatorsModule } from "./custom-validators/custom-validators.module";
 import { UploadFileModule } from "./upload-file/upload-file.module";
 
+import { FileUploadModule } from "ng2-file-upload";
+
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
   imports: [
@@ -26,6 +28,7 @@ import { UploadFileModule } from "./upload-file/upload-file.module";
     BsDropdownModule.forRoot(),
     FormsModule,
     HttpModule,
+    FileUploadModule,
     EmployeeModule,
     ProductModule,
     CustomValidatorsModule,

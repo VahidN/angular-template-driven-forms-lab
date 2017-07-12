@@ -10,7 +10,7 @@ export class AppErrorHandler implements ErrorHandler {
   ) {}
 
   handleError(error: any): void {
-    // console.log("Error:", error);
+    console.log("Error:", error);
 
     const url =
       this.locationProvider instanceof PathLocationStrategy
