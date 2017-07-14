@@ -20,7 +20,7 @@
         "../node_modules/ng2-toasty/bundles/style-bootstrap.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": ["../node_modules/jssha/src/sha512.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

@@ -19,6 +19,7 @@ import { CustomValidatorsModule } from "./custom-validators/custom-validators.mo
 import { UploadFileModule } from "./upload-file/upload-file.module";
 
 import { FileUploadModule } from "ng2-file-upload";
+import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -33,6 +34,7 @@ import { FileUploadModule } from "ng2-file-upload";
     ProductModule,
     CustomValidatorsModule,
     UploadFileModule,
+    UsingThirdPartyLibrariesModule,
     AppRoutingModule
   ],
   providers: [{ provide: ErrorHandler, useClass: AppErrorHandler }],

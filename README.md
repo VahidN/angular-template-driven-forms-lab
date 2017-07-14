@@ -17,22 +17,27 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to upload files to the server without using any third-party plugins.
 - How to upload files to the server using the `ng2-file-upload` plugin.
 - How to perform remote validation with template driven forms.
+- How to use typed third-party JavaScript libraries.
+- How to use un-typed third-party JavaScript libraries.
 
 
 How to run it
 -------------
+
 - Install the `Angular-CLI`.
-- Open two command prompt consoles and then navigate to the root of the current app. 
+- Open two command prompt consoles and then navigate to the root of the current app.
 - Run the following commands in the first one:
-```
+
+```PowerShell
 npm install
 ng build --watch
 ```
+
 - And these commands in the second one:
-```
+
+```PowerShell
 dotnet restore
 dotnet watch run
 ```
+
 - Now to browse the application, navigate to http://localhost:5000
-
-
