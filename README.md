@@ -19,7 +19,8 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to perform remote validation with template driven forms.
 - How to use typed third-party JavaScript libraries.
 - How to use un-typed third-party JavaScript libraries.
-
+- How to add `SameSite Cookie` support in web.config file.
+- How to add `Content-Security-Policy` headers for an Angular app and how to log received `csp-report`s.
 
 How to run it
 -------------

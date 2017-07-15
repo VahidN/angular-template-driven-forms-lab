@@ -29,6 +29,7 @@ namespace AngularTemplateDrivenFormsLab
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseContentSecurityPolicy();
             app.UseAngularAntiforgeryToken();
 
             app.Use(async (context, next) =>
