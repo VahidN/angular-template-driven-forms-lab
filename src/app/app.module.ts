@@ -15,11 +15,13 @@ import { ToastyModule } from "ng2-toasty";
 import { AppErrorHandler } from "./app.error-handler";
 
 import { BsDropdownModule } from "ngx-bootstrap";
+
 import { CustomValidatorsModule } from "./custom-validators/custom-validators.module";
 import { UploadFileModule } from "./upload-file/upload-file.module";
 
 import { FileUploadModule } from "ng2-file-upload";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
+import { SimpleGridModule } from "./simple-grid/simple-grid.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -35,6 +37,7 @@ import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/us
     CustomValidatorsModule,
     UploadFileModule,
     UsingThirdPartyLibrariesModule,
+    SimpleGridModule,
     AppRoutingModule
   ],
   providers: [{ provide: ErrorHandler, useClass: AppErrorHandler }],

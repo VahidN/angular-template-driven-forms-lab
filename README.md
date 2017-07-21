@@ -21,6 +21,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use un-typed third-party JavaScript libraries.
 - How to add `SameSite Cookie` support in web.config file.
 - How to add `Content-Security-Policy` headers for an Angular app and how to log received `csp-report`s.
+- How to add a simple angular grid with server side paging and sorting.
 
 How to run it
 -------------
