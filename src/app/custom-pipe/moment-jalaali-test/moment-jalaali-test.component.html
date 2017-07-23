@@ -1,0 +1,15 @@
+<h1>Using moment-jalaali</h1>
+<div dir="rtl" class="alert alert-info">
+  اكنون:
+  <span dir="ltr">{{now}}</span>
+  <br/>
+  <span dir="rtl">{{nowLongDateFormat}}</span>
+  <br/>
+  <span dir="rtl">{{nowExtraLongDateFormat}}</span>
+</div>
+
+<h2>Server side dates:</h2>
+<div *ngFor="let date of dates">
+  <span dir="ltr">{{date | momentJalaali:'jYYYY/jMM/jDD hh:mm' }}</span>,
+  <span dir="rtl">{{date | momentJalaali:'jD jMMMM jYYYY [ساعت] LT'}}</span>
+</div>

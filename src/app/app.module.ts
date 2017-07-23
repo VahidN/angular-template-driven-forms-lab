@@ -22,6 +22,7 @@ import { UploadFileModule } from "./upload-file/upload-file.module";
 import { FileUploadModule } from "ng2-file-upload";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 import { SimpleGridModule } from "./simple-grid/simple-grid.module";
+import { CustomPipeModule } from "./custom-pipe/custom-pipe.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -38,6 +39,7 @@ import { SimpleGridModule } from "./simple-grid/simple-grid.module";
     UploadFileModule,
     UsingThirdPartyLibrariesModule,
     SimpleGridModule,
+    CustomPipeModule,
     AppRoutingModule
   ],
   providers: [{ provide: ErrorHandler, useClass: AppErrorHandler }],
