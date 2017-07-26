@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>ng2-lab</title>
+    <base href="/">
+
+    <environment names="Development">
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" asp-href-include="~/styles*.css" />
+    </environment>
+</head>
+<body>
+    @RenderBody()
+
+<app-root></app-root>
+<environment names="Development">
+    <script type="text/javascript" src="/inline.bundle.js"></script>
+    <script type="text/javascript" src="/polyfills.bundle.js"></script>
+    <script type="text/javascript" src="/scripts.bundle.js"></script>
+    <script type="text/javascript" src="/styles.bundle.js"></script>
+    <script type="text/javascript" src="/vendor.bundle.js"></script>
+    <script type="text/javascript" src="/main.bundle.js"></script>
+</environment>
+<environment names="Production,Staging">
+    <script type="text/javascript" asp-src-include="~/inline*.js"></script>
+    <script type="text/javascript" asp-src-include="~/polyfills*.js"></script>
+    <script type="text/javascript" asp-src-include="~/scripts*.js"></script>
+    <script type="text/javascript" asp-src-include="~/vendor*.js"></script>
+    <script type="text/javascript" asp-src-include="~/main*.js"></script>
+</environment>
+</body>
+</html>

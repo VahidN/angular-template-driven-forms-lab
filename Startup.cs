@@ -31,20 +31,7 @@ namespace AngularTemplateDrivenFormsLab
 
             app.UseContentSecurityPolicy();
             app.UseAngularAntiforgeryToken();
-
-            app.Use(async (context, next) =>
-            {
-                await next();
-                var path = context.Request.Path.Value;
-                if (path != null &&
-                    context.Response.StatusCode == 404 &&
-                    !Path.HasExtension(path) &&
-                    !path.StartsWith("/api/", StringComparison.OrdinalIgnoreCase))
-                {
-                    context.Request.Path = "/index.html";
-                    await next();
-                }
-            });
+            app.UseAngularPushStateRouting();
 
             app.UseMvcWithDefaultRoute();
             app.UseDefaultFiles();
