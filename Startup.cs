@@ -31,9 +31,16 @@ namespace AngularTemplateDrivenFormsLab
 
             app.UseContentSecurityPolicy();
             app.UseAngularAntiforgeryToken();
-            app.UseAngularPushStateRouting();
+            app.UseAngularPushStateRouting(); // or just use `routes.MapSpaFallbackRoute` after the `default` route.
 
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc(routes => {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+                // routes.MapSpaFallbackRoute("angular-fallback",
+                //    new { controller = "Home", action = "Index" });
+            });
             app.UseDefaultFiles();
             app.UseStaticFiles();
         }
