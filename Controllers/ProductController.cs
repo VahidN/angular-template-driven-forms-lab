@@ -60,5 +60,58 @@ namespace AngularTemplateDrivenFormsLab.Controllers
 
             return pagedResult;
         }
+
+        [HttpPost("[action]")]
+        public IActionResult AddProduct([FromBody] Product model)
+        {
+            //todo: save model
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var rnd = new Random();
+            model.ProductId = rnd.Next(1501, 2000);
+            ProductDataSource.LatestProducts.Add(model);
+
+            return Created("", model);
+        }
+
+        [HttpPut("[action]/{id:int}")]
+        public IActionResult UpdateProduct(int id, [FromBody] Product model)
+        {
+            //todo: update model
+
+            if (!ModelState.IsValid || id != model.ProductId)
+            {
+                return BadRequest();
+            }
+
+            var item = ProductDataSource.LatestProducts.FirstOrDefault(x => x.ProductId == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            item.IsAvailable = model.IsAvailable;
+            item.Price = model.Price;
+            item.ProductName = model.ProductName;
+
+            return Created("", model);
+        }
+
+        [HttpDelete("[action]/{id:int}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            //todo: delete model
+            var item = ProductDataSource.LatestProducts.FirstOrDefault(x => x.ProductId == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            ProductDataSource.LatestProducts.Remove(item);
+            return Ok();
+        }
     }
 }

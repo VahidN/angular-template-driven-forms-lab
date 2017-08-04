@@ -1,3 +1,7 @@
+<div class="panel">
+  <input type="button" value="Add new product" class="btn btn-primary" (click)="addItem()"
+  />
+</div>
 <div>
   <table class="table table-striped table-hover table-bordered table-condensed">
     <thead>
@@ -6,25 +10,20 @@
         <th *ngFor="let column of columns" class="text-center">
           <div *ngIf="column.isSortable" (click)="sortBy(column.propertyName)" style="cursor: pointer">
             {{ column.title }}
-            <i *ngIf="queryModel.sortBy === column.propertyName" class="glyphicon"
-              [class.glyphicon-sort-by-order]="queryModel.isAscending" [class.glyphicon-sort-by-order-alt]="!queryModel.isAscending"></i>
+            <i *ngIf="queryModel.sortBy === column.propertyName" class="glyphicon" [class.glyphicon-sort-by-order]="queryModel.isAscending"
+              [class.glyphicon-sort-by-order-alt]="!queryModel.isAscending"></i>
           </div>
           <div *ngIf="!column.isSortable" style="cursor: pointer">
             {{ column.title }}
           </div>
         </th>
+        <th style="width:3%"></th>
+        <th style="width:3%"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of queryResult.items; let i = index">
-        <td class="text-center">{{ itemsPerPage * (currentPage - 1) + i + 1 }}</td>
-        <td class="text-center">{{ item.productId }}</td>
-        <td class="text-center">{{ item.productName }}</td>
-        <td class="text-center">{{ item.price | number:'.0' }}</td>
-        <td class="text-center">
-          <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
-            disabled="disabled" />
-        </td>
+        <ng-container [ngTemplateOutlet]="loadTemplate(item)" [ngOutletContext]="{ $implicit: item, idx: i }"></ng-container>
       </tr>
     </tbody>
   </table>
@@ -40,3 +39,47 @@
 <div class="alert alert-warning" *ngIf="isLoading">
   Loading ... <span class="glyphicon glyphicon-refresh glyphicon-spin spinner"></span>
 </div>
+
+<!--The Html Template for Read-Only Rows-->
+<ng-template #readOnlyTemplate let-item let-i="idx">
+  <td class="text-center">{{ itemsPerPage * (currentPage - 1) + i + 1 }}</td>
+  <td class="text-center">{{ item.productId }}</td>
+  <td class="text-center">{{ item.productName }}</td>
+  <td class="text-center">{{ item.price | number:'.0' }}</td>
+  <td class="text-center">
+    <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
+      disabled="disabled" />
+  </td>
+  <td>
+    <input type="button" value="Edit" class="btn btn-default btn-xs" (click)="editItem(item)"
+    />
+  </td>
+  <td>
+    <input type="button" value="Delete" (click)="deleteItem(item)" class="btn btn-danger btn-xs"
+    />
+  </td>
+</ng-template>
+
+<!--The Html Template for Editable Rows-->
+<ng-template #editTemplate let-item let-i="idx">
+  <td class="text-center">{{ itemsPerPage * (currentPage - 1) + i + 1 }}</td>
+  <td class="text-center">{{ item.productId }}</td>
+  <td class="text-center">
+    <input type="text" [(ngModel)]="selectedItem.productName" class="form-control" />
+  </td>
+  <td class="text-center">
+    <input type="text" [(ngModel)]="selectedItem.price" class="form-control" />
+  </td>
+  <td class="text-center">
+    <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
+      [(ngModel)]="selectedItem.isAvailable" />
+  </td>
+  <td>
+    <input type="button" value="Save" (click)="saveItem()" class="btn btn-success btn-xs"
+    />
+  </td>
+  <td>
+    <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning btn-xs"
+    />
+  </td>
+</ng-template>

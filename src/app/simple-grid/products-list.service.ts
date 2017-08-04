@@ -1,5 +1,5 @@
 import { Observable } from "rxjs/Observable";
-import { Http } from "@angular/http";
+import { Http, RequestOptions, Response, Headers } from "@angular/http";
 import { Injectable } from "@angular/core";
 
 import { PagedQueryModel } from "./paged-query-model";
@@ -37,5 +37,37 @@ export class ProductsListService {
       }
     }
     return parts.join("&");
+  }
+
+  private extractData(res: Response) {
+    const body = res.json();
+    return body || {};
+  }
+
+  private handleError(error: Response): Observable<any> {
+    console.error("observable error: ", error);
+    return Observable.throw(error.statusText);
+  }
+
+  addAppProduct(item: AppProduct): Observable<AppProduct> {
+    const header = new Headers({ "Content-Type": "application/json" });
+    const options = new RequestOptions({ headers: header });
+    return this.http
+      .post(`${this.baseUrl}/AddProduct`, JSON.stringify(item), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  updateAppProduct(id: number, item: AppProduct): Observable<AppProduct> {
+    const header = new Headers({ "Content-Type": "application/json" });
+    const options = new RequestOptions({ headers: header });
+    return this.http
+      .put(`${this.baseUrl}/UpdateProduct/${id}`, JSON.stringify(item), options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
+
+  deleteAppProduct(id: number): Observable<Response> {
+    return this.http.delete(`${this.baseUrl}/DeleteProduct/${id}`);
   }
 }
