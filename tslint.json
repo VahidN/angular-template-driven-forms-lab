@@ -2,7 +2,15 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
+  "extends": [
+    "rxjs-tslint-rules"
+  ],  
   "rules": {
+    "rxjs-add": { "severity": "error" },
+    "rxjs-no-patched": { "severity": "error" },
+	"rxjs-no-unused-add": { "severity": "error" },
+    "rxjs-no-wholesale": { "severity": "error" },
+	"rxjs-no-subject-unsubscribe": { "severity": "error" },
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
