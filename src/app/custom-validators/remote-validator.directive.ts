@@ -5,10 +5,6 @@ import {
   NG_ASYNC_VALIDATORS
 } from "@angular/forms";
 import { Http, RequestOptions, Response, Headers } from "@angular/http";
-import "rxjs/add/operator/map";
-import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/takeUntil";
-import "rxjs/add/operator/take";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 

@@ -24,6 +24,9 @@ import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/us
 import { SimpleGridModule } from "./simple-grid/simple-grid.module";
 import { CustomPipeModule } from "./custom-pipe/custom-pipe.module";
 
+// import RxJs needed operators only once
+import "./shared/rxjs-operators";
+
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
   imports: [
