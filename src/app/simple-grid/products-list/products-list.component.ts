@@ -1,5 +1,4 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { Response } from "@angular/http";
 
 import { ProductsListService } from "./../products-list.service";
 import { PagedQueryModel } from "./../paged-query-model";
@@ -76,7 +75,7 @@ export class ProductsListComponent implements OnInit {
     console.log(item);
     this.productsService
       .deleteAppProduct(item.productId)
-      .subscribe((resp: Response) => {
+      .subscribe(response => {
         this.toastyService.success(
           <ToastOptions>{
             title: "Success!",

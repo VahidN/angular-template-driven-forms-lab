@@ -4,7 +4,11 @@ import {
   AbstractControl,
   NG_ASYNC_VALIDATORS
 } from "@angular/forms";
-import { Http, RequestOptions, Response, Headers } from "@angular/http";
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 
@@ -24,7 +28,7 @@ export class RemoteValidatorDirective implements AsyncValidator {
   @Input("remote-field") remoteField: string;
   @Input("remote-additional-fields") remoteAdditionalFields: string;
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   validate(control: AbstractControl): Observable<{ [key: string]: any }> {
     if (!this.remoteUrl || this.remoteUrl === undefined) {
@@ -89,24 +93,16 @@ export class RemoteValidatorDirective implements AsyncValidator {
   }
 
   private doRemoteValidation(data: any): Observable<IRemoteValidationResult> {
-    const headers = new Headers({ "Content-Type": "application/json" }); // for ASP.NET MVC
-    const options = new RequestOptions({ headers: headers });
-
+    const headers = new HttpHeaders({ "Content-Type": "application/json" }); // for ASP.NET MVC
     return this.http
-      .post(this.remoteUrl, JSON.stringify(data), options)
-      .map(this.extractData)
+      .post<IRemoteValidationResult>(this.remoteUrl, JSON.stringify(data), {
+        headers: headers
+      })
       .do(result => console.log("remoteValidation result: ", result))
-      .catch(this.handleError);
-  }
-
-  private extractData(res: Response): IRemoteValidationResult {
-    const body = <IRemoteValidationResult>res.json();
-    return body || (<IRemoteValidationResult>{});
-  }
-
-  private handleError(error: Response): Observable<any> {
-    console.error("observable error: ", error);
-    return Observable.throw(error.statusText);
+      .catch((error: HttpErrorResponse) => {
+        console.error("observable error: ", error);
+        return Observable.throw(error.statusText);
+      });
   }
 }
 

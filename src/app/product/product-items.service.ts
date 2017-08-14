@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
 
@@ -10,24 +10,24 @@ import { Product } from "./product";
 export class ProductItemsService {
   private baseUrl = "api/product";
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  private handleError(error: Response): Observable<any> {
+  private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
     return Observable.throw(error.statusText);
   }
 
   getCategories(): Observable<Category[]> {
     return this.http
-      .get(`${this.baseUrl}/GetCategories`)
-      .map(response => response.json() || {})
+      .get<Category[]>(`${this.baseUrl}/GetCategories`)
+      .map(response => response || {})
       .catch(this.handleError);
   }
 
   getProducts(categoryId: number): Observable<Product[]> {
     return this.http
-      .get(`${this.baseUrl}/GetProducts/${categoryId}`)
-      .map(response => response.json() || {})
+      .get<Product[]>(`${this.baseUrl}/GetProducts/${categoryId}`)
+      .map(response => response || {})
       .catch(this.handleError);
   }
 }

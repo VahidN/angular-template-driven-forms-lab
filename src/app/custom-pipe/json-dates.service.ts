@@ -1,4 +1,4 @@
-import { Http } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { Injectable } from "@angular/core";
 
@@ -6,7 +6,7 @@ import { Injectable } from "@angular/core";
 export class JsonDatesService {
   private baseUrl = "api/MomentJalaali";
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   private handleError(error: Response): Observable<any> {
     console.error("observable error: ", error);
@@ -15,8 +15,8 @@ export class JsonDatesService {
 
   getDates(): Observable<any[]> {
     return this.http
-      .get(`${this.baseUrl}/GetDates`)
-      .map(response => response.json() || {})
+      .get<any[]>(`${this.baseUrl}/GetDates`)
+      .map(response => response || {})
       .catch(this.handleError);
   }
 }

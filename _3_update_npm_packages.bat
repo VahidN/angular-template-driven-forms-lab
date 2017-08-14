@@ -1,5 +1,6 @@
 npm install npm-check-updates -g
 ncu
-rem npm update
-rem ncu -a
+ncu -a
+npm update
 rem ncu -u
+pause

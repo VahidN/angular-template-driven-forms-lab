@@ -1,5 +1,9 @@
 import { Injectable } from "@angular/core";
-import { Http, Response, Headers, RequestOptions } from "@angular/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders
+} from "@angular/common/http";
 
 import { Observable } from "rxjs/Observable";
 
@@ -9,38 +13,26 @@ import { Employee } from "./employee";
 export class FormPosterService {
   private baseUrl = "api/employee";
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  private extractData(res: Response) {
-    const body = res.json();
-    return body.fields || {};
-  }
-
-  private handleError(error: Response): Observable<any> {
+  private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
     return Observable.throw(error.statusText);
   }
 
   postEmployeeForm(employee: Employee): Observable<Employee> {
     const body = JSON.stringify(employee);
-    const headers = new Headers({ "Content-Type": "application/json" });
-    const options = new RequestOptions({ headers: headers });
-
+    const headers = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http
-      .post(this.baseUrl, body, options)
-      .map(this.extractData)
+      .post(this.baseUrl, body, { headers: headers })
+      .map((response: any) => response.fields || {})
       .catch(this.handleError);
-  }
-
-  private extractLanguages(res: Response) {
-    const body = res.json();
-    return body || {};
   }
 
   getLanguages(): Observable<string[]> {
     return this.http
-      .get(`${this.baseUrl}/languages`)
-      .map(this.extractLanguages)
+      .get<string[]>(`${this.baseUrl}/languages`)
+      .map(response => response || {})
       .catch(this.handleError);
   }
 }

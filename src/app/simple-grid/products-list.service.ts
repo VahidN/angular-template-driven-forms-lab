@@ -1,5 +1,9 @@
 import { Observable } from "rxjs/Observable";
-import { Http, RequestOptions, Response, Headers } from "@angular/http";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders
+} from "@angular/common/http";
 import { Injectable } from "@angular/core";
 
 import { PagedQueryModel } from "./paged-query-model";
@@ -10,15 +14,16 @@ import { AppProduct } from "./app-product";
 export class ProductsListService {
   private baseUrl = "api/Product";
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getPagedProductsList(
     queryModel: PagedQueryModel
   ): Observable<PagedQueryResult<AppProduct>> {
     return this.http
-      .get(`${this.baseUrl}/GetPagedProducts?${this.toQueryString(queryModel)}`)
-      .map(res => {
-        const result = res.json();
+      .get<PagedQueryResult<AppProduct>>(
+        `${this.baseUrl}/GetPagedProducts?${this.toQueryString(queryModel)}`
+      )
+      .map(result => {
         return new PagedQueryResult<AppProduct>(
           result.totalItems,
           result.items
@@ -39,35 +44,34 @@ export class ProductsListService {
     return parts.join("&");
   }
 
-  private extractData(res: Response) {
-    const body = res.json();
-    return body || {};
-  }
-
-  private handleError(error: Response): Observable<any> {
+  private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
     return Observable.throw(error.statusText);
   }
 
   addAppProduct(item: AppProduct): Observable<AppProduct> {
-    const header = new Headers({ "Content-Type": "application/json" });
-    const options = new RequestOptions({ headers: header });
+    const header = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http
-      .post(`${this.baseUrl}/AddProduct`, JSON.stringify(item), options)
-      .map(this.extractData)
+      .post<AppProduct>(`${this.baseUrl}/AddProduct`, JSON.stringify(item), {
+        headers: header
+      })
+      .map(response => response || {})
       .catch(this.handleError);
   }
 
   updateAppProduct(id: number, item: AppProduct): Observable<AppProduct> {
-    const header = new Headers({ "Content-Type": "application/json" });
-    const options = new RequestOptions({ headers: header });
+    const header = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http
-      .put(`${this.baseUrl}/UpdateProduct/${id}`, JSON.stringify(item), options)
-      .map(this.extractData)
+      .put<AppProduct>(
+        `${this.baseUrl}/UpdateProduct/${id}`,
+        JSON.stringify(item),
+        { headers: header }
+      )
+      .map(response => response || {})
       .catch(this.handleError);
   }
 
-  deleteAppProduct(id: number): Observable<Response> {
+  deleteAppProduct(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/DeleteProduct/${id}`);
   }
 }
