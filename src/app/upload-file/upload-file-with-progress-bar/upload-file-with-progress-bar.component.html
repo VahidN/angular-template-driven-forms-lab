@@ -1,0 +1,58 @@
+<div class="container">
+  <h3>Upload File With ProgressBar Using HttpClient</h3>
+  <form #form="ngForm" (submit)="submitForm(form)" novalidate>
+    <div class="form-group" [class.has-error]="description.invalid && description.touched">
+      <label class="control-label">Description</label>
+      <input #description="ngModel" required type="text" class="form-control" name="description"
+        [(ngModel)]="model.description">
+      <div *ngIf="description.invalid && description.touched">
+        <div class="alert alert-danger"  *ngIf="description.errors.required">
+          description is required.
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label">Screenshot(s)</label>
+      <input #screenshotInput required type="file" multiple (change)="fileChange($event)"
+        class="form-control" name="screenshot">
+    </div>
+
+    <div *ngIf="queueProgress > 0">
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="15%">Event</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Elapsed time</strong></td>
+            <td nowrap>{{uploadTimeElapsed | number:'.1'}} second(s)</td>
+          </tr>
+          <tr>
+            <td><strong>Remaining time</strong></td>
+            <td nowrap>{{uploadTimeRemaining | number:'.1'}} second(s)</td>
+          </tr>
+          <tr>
+            <td><strong>Upload speed</strong></td>
+            <td nowrap>{{uploadSpeed | number:'.3'}} MB/s</td>
+          </tr>
+          <tr>
+            <td><strong>Queue progress</strong></td>
+            <td>
+              <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                aria-valuemin="0" aria-valuemax="100" [attr.aria-valuenow]="queueProgress"
+                [ngStyle]="{ 'width': queueProgress + '%' }">
+                {{queueProgress}}%
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-primary" [disabled]="form.invalid || isUploading" type="submit">Submit</button>
+  </form>
+</div>

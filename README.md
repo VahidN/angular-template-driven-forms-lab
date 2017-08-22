@@ -16,6 +16,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to complete the `.vscode/launch.json` file to allow debugging of the `Angular CLI` project using `VSCode` and `Chrome debugger plugin`.
 - How to upload files to the server without using any third-party plugins.
 - How to upload files to the server using the `ng2-file-upload` plugin.
+- How to upload files to the server using the new HttpClient with progress-bar report.
 - How to perform remote validation with template driven forms.
 - How to use typed third-party JavaScript libraries.
 - How to use un-typed third-party JavaScript libraries.

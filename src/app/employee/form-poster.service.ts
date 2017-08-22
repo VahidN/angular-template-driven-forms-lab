@@ -25,7 +25,7 @@ export class FormPosterService {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http
       .post(this.baseUrl, body, { headers: headers })
-      .map((response: any) => response.fields || {})
+      .map(response => response["fields"] || {})
       .catch(this.handleError);
   }
 
