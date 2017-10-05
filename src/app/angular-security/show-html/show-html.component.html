@@ -1,0 +1,19 @@
+<h3>Binding innerHTML</h3>
+
+<p>Bound value:</p>
+<p>{{htmlContent}}</p>
+
+<p>Result of binding to innerHTML:</p>
+<p [innerHTML]="htmlContent"></p>
+
+<p>Result of binding to dataContainer:</p>
+<p #dataContainer></p>
+
+<p>Result of bypassSecurityTrustHtml:</p>
+<p [innerHTML]="html"></p>
+
+<p>Result of binding to sanitizedHtml:</p>
+<p [innerHTML]="sanitizedHtml"></p>
+
+<p>Result of using the safe pipe:</p>
+<p [innerHTML]="htmlContent | safe: 'html'"></p>

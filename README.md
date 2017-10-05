@@ -27,6 +27,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use ASP.NET Core's `_layout.cshtml` file instead of Angular CLI's `index.html` file for the layout and start page.
 - How to avoid duplication of RxJS operator imports.
 - How to use the new `HttpClient`.
+- How to use `sanitizer.bypassSecurityTrustHtml` method as a new pipe.
 
 How to run it
 -------------
