@@ -23,7 +23,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let item of queryResult.items; let i = index">
-        <ng-container [ngTemplateOutlet]="loadTemplate(item)" [ngOutletContext]="{ $implicit: item, idx: i }"></ng-container>
+        <ng-container [ngTemplateOutlet]="loadTemplate(item)" [ngTemplateOutletContext]="{ $implicit: item, idx: i }"></ng-container>
       </tr>
     </tbody>
   </table>
@@ -37,7 +37,8 @@
   <pre class="card card-block card-header">Page: {{currentPage}} / {{numberOfPages}}</pre>
 </div>
 <div class="alert alert-warning" *ngIf="isLoading">
-  Loading ... <span class="glyphicon glyphicon-refresh glyphicon-spin spinner"></span>
+  Loading ...
+  <span class="glyphicon glyphicon-refresh glyphicon-spin spinner"></span>
 </div>
 
 <!--The Html Template for Read-Only Rows-->

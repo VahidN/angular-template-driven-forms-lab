@@ -283,3 +283,4 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/package-lock.json
