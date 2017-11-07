@@ -1,3 +1,5 @@
+import { SharedModule } from "./shared/shared.module";
+import { CoreModule } from "./core/core.module";
 // import RxJs needed operators only once
 import "./shared/rxjs-operators";
 
@@ -31,6 +33,8 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     BsDropdownModule.forRoot(),
     FormsModule,
     HttpClientModule,
+    CoreModule,
+    SharedModule,
     FileUploadModule,
     EmployeeModule,
     ProductModule,
