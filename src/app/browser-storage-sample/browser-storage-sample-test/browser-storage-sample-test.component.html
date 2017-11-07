@@ -1,0 +1,16 @@
+<h1>Browser storage sample</h1>
+<div class="panel">
+  <button class="btn btn-primary" (click)="sessionStorageSetItem()" type="button">sessionStorage -> Set Item</button>
+  <button class="btn btn-success" (click)="sessionStorageGetItem()" type="button">sessionStorage -> Get Item</button>
+  <div class="alert alert-info" *ngIf="fromSessionStorage">
+    {{fromSessionStorage}}
+  </div>
+</div>
+
+<div class="panel">
+  <button class="btn btn-warning" (click)="localStorageSetItem()" type="button">localStorage -> Set Item</button>
+  <button class="btn btn-success" (click)="localStorageGetItem()" type="button">localStorage -> Get Item</button>
+  <div class="alert alert-info" *ngIf="fromLocalStorage">
+    {{fromLocalStorage}}
+  </div>
+</div>

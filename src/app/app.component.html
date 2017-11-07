@@ -7,7 +7,8 @@
     <ul class="nav navbar-nav">
       <li dropdown>
         <a href dropdownToggle class="dropdown-toggle" (click)="false">
-            Samples <span class="caret"></span>
+          Samples
+          <span class="caret"></span>
         </a>
         <ul *dropdownMenu class="dropdown-menu" role="menu">
           <li role="menuitem" routerLinkActive="active">
@@ -42,6 +43,9 @@
           </li>
           <li>
             <a [routerLink]="['/showHtml']">Angular Security / Show Html</a>
+          </li>
+          <li>
+            <a [routerLink]="['/showBrowserStorageSample']">Browser Storage Sample</a>
           </li>
         </ul>
       </li>

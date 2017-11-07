@@ -24,6 +24,7 @@ import { SimpleGridModule } from "./simple-grid/simple-grid.module";
 import { UploadFileModule } from "./upload-file/upload-file.module";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-storage-sample.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -44,6 +45,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     SimpleGridModule,
     CustomPipeModule,
     AngularSecurityModule,
+    BrowserStorageSampleModule,
     AppRoutingModule
   ],
   providers: [{ provide: ErrorHandler, useClass: AppErrorHandler }],
