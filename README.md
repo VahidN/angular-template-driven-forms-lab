@@ -30,6 +30,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use `sanitizer.bypassSecurityTrustHtml` method as a new pipe.
 - How to define and use shared and core modules to provide shared singleton services and components between different modules of the app.
 - How to work with BrowserStorage capabilities.
+- How to read data before application startup.
 
 How to run it
 -------------

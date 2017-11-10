@@ -1,10 +1,11 @@
+import { AppConfigService } from "./core/app-config.service";
 import { SharedModule } from "./shared/shared.module";
 import { CoreModule } from "./core/core.module";
 // import RxJs needed operators only once
 import "./shared/rxjs-operators";
 
 import { HttpClientModule } from "@angular/common/http";
-import { ErrorHandler, NgModule } from "@angular/core";
+import { ErrorHandler, NgModule, APP_INITIALIZER } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
 import { FileUploadModule } from "ng2-file-upload";
@@ -25,6 +26,7 @@ import { UploadFileModule } from "./upload-file/upload-file.module";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-storage-sample.module";
+import { ReadAppConfigModule } from './read-app-config/read-app-config.module';
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -46,9 +48,20 @@ import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-sto
     CustomPipeModule,
     AngularSecurityModule,
     BrowserStorageSampleModule,
+    ReadAppConfigModule,
     AppRoutingModule
   ],
-  providers: [{ provide: ErrorHandler, useClass: AppErrorHandler }],
+  providers: [
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (config: AppConfigService) => () => config.loadClientConfig(),
+      deps: [AppConfigService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

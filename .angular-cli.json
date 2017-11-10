@@ -7,7 +7,11 @@
     {
       "root": "src",
       "outDir": "wwwroot",
-      "assets": ["assets", "favicon.ico"],
+      "assets": [
+        "assets",
+        "favicon.ico",
+        "client-config.json"
+      ],
       "index": "index.html",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
@@ -20,7 +24,9 @@
         "../node_modules/ng2-toasty/bundles/style-bootstrap.css",
         "styles.css"
       ],
-      "scripts": ["../node_modules/jssha/src/sha512.js"],
+      "scripts": [
+        "../node_modules/jssha/src/sha512.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
