@@ -18,7 +18,7 @@ export class ProductsListComponent implements OnInit {
   currentPage: number;
   numberOfPages: number;
   isLoading = false;
-  queryModel = new PagedQueryModel("productId", true, 1, this.itemsPerPage);
+  queryModel = new PagedQueryModel("productId", true, 1, this.itemsPerPage, "", "");
   queryResult = new PagedQueryResult<AppProduct>(0, []);
   columns: GridColumn[] = [
     new GridColumn("Id", "productId", true),
@@ -35,7 +35,7 @@ export class ProductsListComponent implements OnInit {
   constructor(
     private productsService: ProductsListService,
     private toastyService: ToastyService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getPagedProductsList();
@@ -148,5 +148,17 @@ export class ProductsListComponent implements OnInit {
     } else {
       return this.readOnlyTemplate;
     }
+  }
+
+  doFilter() {
+    this.queryModel.page = 1;
+    this.getPagedProductsList();
+  }
+
+  resetFilter() {
+    this.queryModel.page = 1;
+    this.queryModel.filterByColumn = "";
+    this.queryModel.filterByValue = "";
+    this.getPagedProductsList();
   }
 }

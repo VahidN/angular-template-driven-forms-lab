@@ -1,7 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="form-group">
+      <input type="text" [(ngModel)]="queryModel.filterByValue" placeholder="Search For ..."
+        class="form-control" />
+    </div>
+    <div class="form-group">
+      <select class="form-control" name="filterColumn" [(ngModel)]="queryModel.filterByColumn">
+        <option value="">Filter by ...</option>
+        <option *ngFor="let column of columns" [value]="column.propertyName">
+          {{ column.title }}
+        </option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="button" (click)="doFilter()">Search</button>
+    <button class="btn btn-default" type="button" (click)="resetFilter()">Reset</button>
+  </div>
+</div>
+
 <div class="panel">
   <input type="button" value="Add new product" class="btn btn-primary" (click)="addItem()"
   />
 </div>
+
 <div>
   <table class="table table-striped table-hover table-bordered table-condensed">
     <thead>

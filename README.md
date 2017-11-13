@@ -22,7 +22,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use un-typed third-party JavaScript libraries.
 - How to add `SameSite Cookie` support in web.config file.
 - How to add `Content-Security-Policy` headers for an Angular app and how to log received `csp-report`s.
-- How to add a simple angular grid with server side paging, sorting and add/edit/delete/update capability.
+- How to add a simple angular grid with server side paging, sorting, filtering and add/edit/delete/update capability.
 - How to define a custom pipe to use the `moment-jalaali` library.
 - How to use ASP.NET Core's `_layout.cshtml` file instead of Angular CLI's `index.html` file for the layout and start page.
 - How to avoid duplication of RxJS operator imports.

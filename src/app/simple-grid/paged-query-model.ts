@@ -3,6 +3,8 @@ export class PagedQueryModel {
     public sortBy: string,
     public isAscending: boolean,
     public page: number,
-    public pageSize: number
-  ) {}
+    public pageSize: number,
+    public filterByColumn: string,
+    public filterByValue: string,
+  ) { }
 }

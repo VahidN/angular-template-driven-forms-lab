@@ -10,5 +10,7 @@ namespace AngularTemplateDrivenFormsLab.Models
         public bool IsAscending { get; set; }
         public int Page { get; set; }
         public int PageSize { get; set; }
+        public string FilterByColumn { get; set; }
+        public string FilterByValue { get; set; }
     }
 }

@@ -41,8 +41,6 @@ namespace AngularTemplateDrivenFormsLab.Controllers
             var query = ProductDataSource.LatestProducts
                                          .AsQueryable();
 
-            //TODO: Apply Filtering ... .where(p => p....) ...
-
             var columnsMap = new Dictionary<string, Expression<Func<Product, object>>>()
             {
                 ["productId"] = p => p.ProductId,
@@ -50,6 +48,7 @@ namespace AngularTemplateDrivenFormsLab.Controllers
                 ["isAvailable"] = p => p.IsAvailable,
                 ["price"] = p => p.Price
             };
+            query = query.ApplyFiltering(queryModel, columnsMap);
             query = query.ApplyOrdering(queryModel, columnsMap);
 
             pagedResult.TotalItems = query.Count();
