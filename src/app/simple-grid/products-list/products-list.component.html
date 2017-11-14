@@ -49,58 +49,74 @@
   </table>
   <!-- http://valor-software.com/ngx-bootstrap/#/pagination -->
   <div align="center">
+    <div class="row alert alert-info">
+      <div class="col-md-6">
+        <div class="col-md-5">
+          <label>Items per page: </label>
+        </div>
+        <div class="col-md-7">
+          <select class="form-control" name="itemsNumber" [(ngModel)]="queryModel.pageSize"
+            (change)="resetPageSize()">
+            <option *ngFor="let item of itemsPerPage" [value]="item">
+              {{ item }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        Page: {{queryModel.page}} / {{numberOfPages}}, Total items: {{queryResult.totalItems}}
+      </div>
+    </div>
     <pagination [maxSize]="8" [boundaryLinks]="true" [totalItems]="queryResult.totalItems"
-      [rotate]="false" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"
-      lastText="&raquo;" (numPages)="numberOfPages = $event" [(ngModel)]="currentPage"
-      (pageChanged)="onPageChange($event)"></pagination>
+      [itemsPerPage]="queryModel.pageSize" [rotate]="false" previousText="&lsaquo;"
+      nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (numPages)="numberOfPages = $event"
+      [(ngModel)]="queryModel.page" (pageChanged)="onPageChange($event)"></pagination>
   </div>
-  <pre class="card card-block card-header">Page: {{currentPage}} / {{numberOfPages}}</pre>
-</div>
-<div class="alert alert-warning" *ngIf="isLoading">
-  Loading ...
-  <span class="glyphicon glyphicon-refresh glyphicon-spin spinner"></span>
-</div>
+  <div class="alert alert-warning" *ngIf="isLoading">
+    Loading ...
+    <span class="glyphicon glyphicon-refresh glyphicon-spin spinner"></span>
+  </div>
 
-<!--The Html Template for Read-Only Rows-->
-<ng-template #readOnlyTemplate let-item let-i="idx">
-  <td class="text-center">{{ itemsPerPage * (currentPage - 1) + i + 1 }}</td>
-  <td class="text-center">{{ item.productId }}</td>
-  <td class="text-center">{{ item.productName }}</td>
-  <td class="text-center">{{ item.price | number:'.0' }}</td>
-  <td class="text-center">
-    <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
-      disabled="disabled" />
-  </td>
-  <td>
-    <input type="button" value="Edit" class="btn btn-default btn-xs" (click)="editItem(item)"
-    />
-  </td>
-  <td>
-    <input type="button" value="Delete" (click)="deleteItem(item)" class="btn btn-danger btn-xs"
-    />
-  </td>
-</ng-template>
+  <!--The Html Template for Read-Only Rows-->
+  <ng-template #readOnlyTemplate let-item let-i="idx">
+    <td class="text-center">{{ queryModel.pageSize * (queryModel.page - 1) + i + 1 }}</td>
+    <td class="text-center">{{ item.productId }}</td>
+    <td class="text-center">{{ item.productName }}</td>
+    <td class="text-center">{{ item.price | number:'.0' }}</td>
+    <td class="text-center">
+      <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
+        disabled="disabled" />
+    </td>
+    <td>
+      <input type="button" value="Edit" class="btn btn-default btn-xs" (click)="editItem(item)"
+      />
+    </td>
+    <td>
+      <input type="button" value="Delete" (click)="deleteItem(item)" class="btn btn-danger btn-xs"
+      />
+    </td>
+  </ng-template>
 
-<!--The Html Template for Editable Rows-->
-<ng-template #editTemplate let-item let-i="idx">
-  <td class="text-center">{{ itemsPerPage * (currentPage - 1) + i + 1 }}</td>
-  <td class="text-center">{{ item.productId }}</td>
-  <td class="text-center">
-    <input type="text" [(ngModel)]="selectedItem.productName" class="form-control" />
-  </td>
-  <td class="text-center">
-    <input type="text" [(ngModel)]="selectedItem.price" class="form-control" />
-  </td>
-  <td class="text-center">
-    <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
-      [(ngModel)]="selectedItem.isAvailable" />
-  </td>
-  <td>
-    <input type="button" value="Save" (click)="saveItem()" class="btn btn-success btn-xs"
-    />
-  </td>
-  <td>
-    <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning btn-xs"
-    />
-  </td>
-</ng-template>
+  <!--The Html Template for Editable Rows-->
+  <ng-template #editTemplate let-item let-i="idx">
+    <td class="text-center">{{ queryModel.pageSize * (queryModel.page - 1) + i + 1 }}</td>
+    <td class="text-center">{{ item.productId }}</td>
+    <td class="text-center">
+      <input type="text" [(ngModel)]="selectedItem.productName" class="form-control" />
+    </td>
+    <td class="text-center">
+      <input type="text" [(ngModel)]="selectedItem.price" class="form-control" />
+    </td>
+    <td class="text-center">
+      <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
+        [(ngModel)]="selectedItem.isAvailable" />
+    </td>
+    <td>
+      <input type="button" value="Save" (click)="saveItem()" class="btn btn-success btn-xs"
+      />
+    </td>
+    <td>
+      <input type="button" value="Cancel" (click)="cancel()" class="btn btn-warning btn-xs"
+      />
+    </td>
+  </ng-template>

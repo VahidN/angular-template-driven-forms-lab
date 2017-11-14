@@ -14,11 +14,10 @@ import { ToastyService, ToastOptions } from "ng2-toasty";
   styleUrls: ["./products-list.component.css"]
 })
 export class ProductsListComponent implements OnInit {
-  itemsPerPage = 7;
-  currentPage: number;
+  itemsPerPage = [10, 15, 20, 25, 30, 40, 50, 100];
   numberOfPages: number;
   isLoading = false;
-  queryModel = new PagedQueryModel("productId", true, 1, this.itemsPerPage, "", "");
+  queryModel = new PagedQueryModel("productId", true, 1, 10, "", "");
   queryResult = new PagedQueryResult<AppProduct>(0, []);
   columns: GridColumn[] = [
     new GridColumn("Id", "productId", true),
@@ -159,6 +158,11 @@ export class ProductsListComponent implements OnInit {
     this.queryModel.page = 1;
     this.queryModel.filterByColumn = "";
     this.queryModel.filterByValue = "";
+    this.getPagedProductsList();
+  }
+
+  resetPageSize() {
+    this.queryModel.page = 1;
     this.getPagedProductsList();
   }
 }
