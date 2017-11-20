@@ -31,6 +31,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to define and use shared and core modules to provide shared singleton services and components between different modules of the app.
 - How to work with BrowserStorage capabilities.
 - How to read data before application startup.
+- How to use server side ModelState validation errors in Angular Apps.
 
 How to run it
 -------------
