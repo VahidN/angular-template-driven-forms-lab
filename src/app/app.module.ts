@@ -26,8 +26,8 @@ import { UploadFileModule } from "./upload-file/upload-file.module";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-storage-sample.module";
-import { ReadAppConfigModule } from './read-app-config/read-app-config.module';
-import { ModelStateValidationModule } from './model-state-validation/model-state-validation.module';
+import { ReadAppConfigModule } from "./read-app-config/read-app-config.module";
+import { ModelStateValidationModule } from "./model-state-validation/model-state-validation.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -38,7 +38,7 @@ import { ModelStateValidationModule } from './model-state-validation/model-state
     FormsModule,
     HttpClientModule,
     CoreModule,
-    SharedModule,
+    SharedModule.forRoot(),
     FileUploadModule,
     EmployeeModule,
     ProductModule,
