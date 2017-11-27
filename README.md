@@ -32,6 +32,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to work with BrowserStorage capabilities.
 - How to read data before application startup.
 - How to use server side ModelState validation errors in Angular Apps.
+- How to display a `Page Loader/ng2-slim-loading-bar` with a new HTTPClient interceptor.
 
 How to run it
 -------------

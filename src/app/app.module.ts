@@ -5,17 +5,13 @@ import { CoreModule } from "./core/core.module";
 import "./shared/rxjs-operators";
 
 import { HttpClientModule } from "@angular/common/http";
-import { ErrorHandler, NgModule, APP_INITIALIZER } from "@angular/core";
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { BrowserModule } from "@angular/platform-browser";
-import { FileUploadModule } from "ng2-file-upload";
-import { ToastyModule } from "ng2-toasty";
-import { BsDropdownModule } from "ngx-bootstrap";
 
 import { AngularSecurityModule } from "./angular-security/angular-security.module";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { AppErrorHandler } from "./app.error-handler";
 import { CustomPipeModule } from "./custom-pipe/custom-pipe.module";
 import { CustomValidatorsModule } from "./custom-validators/custom-validators.module";
 import { EmployeeModule } from "./employee/employee.module";
@@ -33,13 +29,10 @@ import { ModelStateValidationModule } from "./model-state-validation/model-state
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
-    ToastyModule.forRoot(),
-    BsDropdownModule.forRoot(),
     FormsModule,
     HttpClientModule,
     CoreModule,
     SharedModule.forRoot(),
-    FileUploadModule,
     EmployeeModule,
     ProductModule,
     CustomValidatorsModule,
@@ -54,16 +47,7 @@ import { ModelStateValidationModule } from "./model-state-validation/model-state
     AppRoutingModule
   ],
   providers: [
-    {
-      provide: ErrorHandler,
-      useClass: AppErrorHandler
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (config: AppConfigService) => () => config.loadClientConfig(),
-      deps: [AppConfigService],
-      multi: true
-    }],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
