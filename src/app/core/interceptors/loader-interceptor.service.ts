@@ -40,6 +40,7 @@ export class LoaderInterceptorService implements HttpInterceptor {
     if (this.pendingRequests <= 0) {
       this.loadingBar.complete();
       this.showLoading = false;
+      this.pendingRequests = 0;
     }
   }
 }

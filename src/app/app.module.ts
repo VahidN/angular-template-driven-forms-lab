@@ -24,6 +24,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
 import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-storage-sample.module";
 import { ReadAppConfigModule } from "./read-app-config/read-app-config.module";
 import { ModelStateValidationModule } from "./model-state-validation/model-state-validation.module";
+import { ServiceComponentCommunicationModule } from "./service-component-communication/service-component-communication.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -44,6 +45,7 @@ import { ModelStateValidationModule } from "./model-state-validation/model-state
     BrowserStorageSampleModule,
     ReadAppConfigModule,
     ModelStateValidationModule,
+    ServiceComponentCommunicationModule,
     AppRoutingModule
   ],
   providers: [
