@@ -25,6 +25,7 @@ import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-sto
 import { ReadAppConfigModule } from "./read-app-config/read-app-config.module";
 import { ModelStateValidationModule } from "./model-state-validation/model-state-validation.module";
 import { ServiceComponentCommunicationModule } from "./service-component-communication/service-component-communication.module";
+import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-bootstrap-dialogs.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -46,6 +47,7 @@ import { ServiceComponentCommunicationModule } from "./service-component-communi
     ReadAppConfigModule,
     ModelStateValidationModule,
     ServiceComponentCommunicationModule,
+    ModalBootstrapDialogsModule,
     AppRoutingModule
   ],
   providers: [

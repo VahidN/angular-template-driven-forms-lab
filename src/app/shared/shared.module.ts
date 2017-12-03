@@ -1,29 +1,37 @@
-﻿import { NgModule, ModuleWithProviders } from "@angular/core";
+﻿import { ConfirmModalComponent } from "./confirm-modal/confirm-modal.component";
+import { NgModule, ModuleWithProviders } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
+import { SharedBootstrapModule } from "./shared.bootstrap.module";
+
 import { ToastyModule } from "ng2-toasty";
-import { BsDropdownModule } from "ngx-bootstrap";
 import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
 import { FileUploadModule } from "ng2-file-upload";
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedBootstrapModule,
     ToastyModule.forRoot(),
-    BsDropdownModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
     FileUploadModule
   ],
+  entryComponents: [
+    // All components about to be loaded "dynamically" need to be declared in the entryComponents section.
+    ConfirmModalComponent
+  ],
   declarations: [
     // common and shared components/directives/pipes between more than one module and components will be listed here.
+    ConfirmModalComponent
   ],
   exports: [
+    // common and shared components/directives/pipes between more than one module and components will be listed here.
     CommonModule,
+    SharedBootstrapModule,
     ToastyModule,
-    BsDropdownModule,
     SlimLoadingBarModule,
     FileUploadModule
-  ], // common and shared components/directives/pipes between more than one module and components will be listed here.
+  ]
   /* No providers here! Since they’ll be already provided in AppModule. */
 })
 export class SharedModule {

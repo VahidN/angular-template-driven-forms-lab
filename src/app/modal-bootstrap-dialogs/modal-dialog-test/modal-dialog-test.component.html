@@ -1,0 +1,18 @@
+<h1>Displaying modal bootstrap dialogs</h1>
+
+<button type="button" class="btn btn-info" (click)="openModal(template1)">Create template modal</button>
+
+<ng-template #template1>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template>
+
+<button type="button" class="btn btn-danger" (click)="deleteRecord()">Delete record</button>
+<div *ngIf="confirmResult" class="alert alert-info">{{confirmResult}}</div>

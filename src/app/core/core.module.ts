@@ -1,4 +1,5 @@
-﻿import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
+﻿import { ModalService } from "./modal.service";
+import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -34,7 +35,8 @@ import { BrowserStorageService } from "./browser-storage.service";
       useFactory: (config: AppConfigService) => () => config.loadClientConfig(),
       deps: [AppConfigService],
       multi: true
-    }
+    },
+    ModalService
   ]
 })
 export class CoreModule {
