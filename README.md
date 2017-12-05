@@ -35,6 +35,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to display a `Page Loader/ng2-slim-loading-bar` with a new HTTPClient interceptor.
 - How to communicate from a Service to a Component.
 - How to display modal bootstrap dialogs and how to load components dynamically as modal dialogs.
+- How to create a custom two way data binding.
 
 How to run it
 -------------

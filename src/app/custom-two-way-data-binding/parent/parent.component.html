@@ -1,0 +1,17 @@
+<h2>Custom two way data binding</h2>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2 class="panel-title">Parnet Component</h2>
+  </div>
+  <div class="panel-body">
+    <label>Available amount:</label> {{amount}}
+    <button (click)="deposit()" class="btn btn-success">Deposit 100</button>
+    <div>
+      <app-child [amount]="amount" (amountChange)="this.amount= $event"> </app-child>
+    </div>
+    <div>
+      <app-child [(amount)]="amount"> </app-child>
+    </div>
+  </div>
+</div>

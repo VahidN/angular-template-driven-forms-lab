@@ -26,6 +26,7 @@ import { ReadAppConfigModule } from "./read-app-config/read-app-config.module";
 import { ModelStateValidationModule } from "./model-state-validation/model-state-validation.module";
 import { ServiceComponentCommunicationModule } from "./service-component-communication/service-component-communication.module";
 import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-bootstrap-dialogs.module";
+import { CustomTwoWayDataBindingModule } from "./custom-two-way-data-binding/custom-two-way-data-binding.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -48,6 +49,7 @@ import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-boo
     ModelStateValidationModule,
     ServiceComponentCommunicationModule,
     ModalBootstrapDialogsModule,
+    CustomTwoWayDataBindingModule,
     AppRoutingModule
   ],
   providers: [
