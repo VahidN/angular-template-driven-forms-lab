@@ -1,8 +1,6 @@
 import { AppConfigService } from "./core/app-config.service";
 import { SharedModule } from "./shared/shared.module";
 import { CoreModule } from "./core/core.module";
-// import RxJs needed operators only once
-import "./shared/rxjs-operators";
 
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule } from "@angular/core";
