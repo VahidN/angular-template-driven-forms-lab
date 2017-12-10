@@ -1,0 +1,23 @@
+<h1>
+  Injection Beyond Classes
+</h1>
+<div class="alert alert-info">
+  <ul>
+    <li>API_BASE_HREF: {{apiBaseHref}}</li>
+    <li>APP_BASE_HREF: {{appBaseHref}}</li>
+    <li>IS_PROD: {{isProd}}</li>
+    <li>APIKey: {{apiKey}}</li>
+    <li>Random-1: {{random}}</li>
+    <li>Random-2: {{random}}</li>
+    <li>emailApiConfig {{emailApiConfig | json}}</li>
+    <li>languages: {{languages | json}}</li>
+    <li>config: {{config | json}}</li>
+    <li>baseUrl: {{baseUrl}}</li>
+    <li>randomFactory-1: {{randomFactory}}</li>
+    <li>randomFactory-2: {{randomFactory}}</li>
+  </ul>
+</div>
+<div class="alert alert-info">
+  <button type="button" class="btn btn-success" (click)="callRandomFactory()">Call randomFactory</button>
+  randomFactory: {{fromRandomFactory}}
+</div>
