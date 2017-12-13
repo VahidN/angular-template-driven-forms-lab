@@ -10,7 +10,7 @@ export class JsonDatesService {
 
   private handleError(error: Response): Observable<any> {
     console.error("observable error: ", error);
-    return Observable.throw(error.statusText);
+    return Observable.throw(error);
   }
 
   getDates(): Observable<any[]> {

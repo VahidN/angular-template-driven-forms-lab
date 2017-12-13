@@ -1,0 +1,48 @@
+<h1>
+  Using timers
+</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Observable.interval(1000)</h2>
+  </div>
+  <div class="panel-body">
+    <div>
+      <label>interval: </label> {{interval}}
+    </div>
+    <div>
+      <button (click)="startInterval()" class="btn btn-success">Start</button>
+      <button (click)="stopInterval()" class="btn btn-danger">Stop</button>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Countdown timer</h2>
+  </div>
+  <div class="panel-body">
+    <div>
+      <label>value: </label> {{countdown}}
+    </div>
+    <div>
+      <button (click)="startCountdownTimer()" class="btn btn-success">Start</button>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Ticker</h2>
+  </div>
+  <div class="panel-body">
+    <div>
+      <label>value: </label> {{tick}}
+    </div>
+    <div>
+      <button (click)="startTicker()" class="btn btn-success">Start</button>
+      <button (click)="pauseTicker()" class="btn btn-danger">Pause</button>
+      <button (click)="resumeTicker()" class="btn btn-default">Resume</button>
+    </div>
+  </div>
+</div>

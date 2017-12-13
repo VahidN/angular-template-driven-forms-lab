@@ -44,7 +44,7 @@ export class UploadFileWithProgressBarService {
       .map(response => response || {})
       .catch((error: HttpErrorResponse) => {
         console.error("observable error: ", error);
-        return Observable.throw(error.statusText);
+        return Observable.throw(error);
       });
   }
 }

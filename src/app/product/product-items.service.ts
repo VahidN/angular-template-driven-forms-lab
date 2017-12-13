@@ -14,7 +14,7 @@ export class ProductItemsService {
 
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
-    return Observable.throw(error.statusText);
+    return Observable.throw(error);
   }
 
   getCategories(): Observable<Category[]> {

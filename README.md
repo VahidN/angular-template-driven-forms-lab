@@ -37,6 +37,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to display modal bootstrap dialogs and how to load components dynamically as modal dialogs.
 - How to create a custom two way data binding.
 - How to create a custom dependency injection provider for the `APP_CONFIG`.
+- How to use timers in an angular application.
 
 How to run it
 -------------

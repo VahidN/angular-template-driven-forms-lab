@@ -17,7 +17,7 @@ export class FormPosterService {
 
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
-    return Observable.throw(error.statusText);
+    return Observable.throw(error);
   }
 
   postEmployeeForm(employee: Employee): Observable<Employee> {

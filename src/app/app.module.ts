@@ -26,6 +26,7 @@ import { ServiceComponentCommunicationModule } from "./service-component-communi
 import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-bootstrap-dialogs.module";
 import { CustomTwoWayDataBindingModule } from "./custom-two-way-data-binding/custom-two-way-data-binding.module";
 import { InjectionBeyondClassesModule } from "./injection-beyond-classes/injection-beyond-classes.module";
+import { TimersModule } from './timers/timers.module';
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -50,6 +51,7 @@ import { InjectionBeyondClassesModule } from "./injection-beyond-classes/injecti
     ModalBootstrapDialogsModule,
     CustomTwoWayDataBindingModule,
     InjectionBeyondClassesModule,
+    TimersModule,
     AppRoutingModule
   ],
   providers: [
