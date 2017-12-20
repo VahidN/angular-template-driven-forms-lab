@@ -1,16 +1,19 @@
-﻿import { ConfirmModalComponent } from "./confirm-modal/confirm-modal.component";
-import { NgModule, ModuleWithProviders } from "@angular/core";
-import { CommonModule } from "@angular/common";
-
-import { SharedBootstrapModule } from "./shared.bootstrap.module";
-
-import { ToastyModule } from "ng2-toasty";
-import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
+﻿import { CommonModule } from "@angular/common";
+import { HttpClientModule } from "@angular/common/http";
+import { ModuleWithProviders, NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { FileUploadModule } from "ng2-file-upload";
+import { SlimLoadingBarModule } from "ng2-slim-loading-bar";
+import { ToastyModule } from "ng2-toasty";
+
+import { ConfirmModalComponent } from "./confirm-modal/confirm-modal.component";
+import { SharedBootstrapModule } from "./shared.bootstrap.module";
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    HttpClientModule,
     SharedBootstrapModule,
     ToastyModule.forRoot(),
     SlimLoadingBarModule.forRoot(),
@@ -27,6 +30,8 @@ import { FileUploadModule } from "ng2-file-upload";
   exports: [
     // common and shared components/directives/pipes between more than one module and components will be listed here.
     CommonModule,
+    FormsModule,
+    HttpClientModule,
     SharedBootstrapModule,
     ToastyModule,
     SlimLoadingBarModule,
