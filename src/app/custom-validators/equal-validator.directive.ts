@@ -1,5 +1,5 @@
-import { Directive, Attribute } from "@angular/core";
-import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
+import { Attribute, Directive } from "@angular/core";
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator } from "@angular/forms";
 
 @Directive({
   // https://angular.io/guide/styleguide#style-02-08
@@ -18,9 +18,9 @@ import { Validator, AbstractControl, NG_VALIDATORS } from "@angular/forms";
   ]
 })
 export class EqualValidatorDirective implements Validator {
-  constructor(@Attribute("compare-to") public compareToControl: string) {}
+  constructor( @Attribute("compare-to") public compareToControl: string) { }
 
-  validate(element: AbstractControl): { [key: string]: any } {
+  validate(element: AbstractControl): ValidationErrors | null {
     const selfValue = element.value;
     const otherControl = element.root.get(this.compareToControl);
 

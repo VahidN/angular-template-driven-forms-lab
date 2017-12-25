@@ -1,8 +1,9 @@
-import { Injectable } from "@angular/core";
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/do";
+
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
 import { SlimLoadingBarService } from "ng2-slim-loading-bar";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class LoaderInterceptorService implements HttpInterceptor {
@@ -23,7 +24,7 @@ export class LoaderInterceptorService implements HttpInterceptor {
           this.hideLoadingBar();
         }
       },
-      (err: any) => {
+      () => {
         this.hideLoadingBar();
       });
   }

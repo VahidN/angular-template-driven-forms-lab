@@ -1,14 +1,6 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Directive, Input } from "@angular/core";
-import {
-  AsyncValidator,
-  AbstractControl,
-  NG_ASYNC_VALIDATORS
-} from "@angular/forms";
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse
-} from "@angular/common/http";
+import { AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS } from "@angular/forms";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 
@@ -28,7 +20,7 @@ export class RemoteValidatorDirective implements AsyncValidator {
   @Input("remote-field") remoteField: string;
   @Input("remote-additional-fields") remoteAdditionalFields: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   validate(control: AbstractControl): Observable<{ [key: string]: any }> {
     if (!this.remoteUrl || this.remoteUrl === undefined) {
@@ -39,7 +31,7 @@ export class RemoteValidatorDirective implements AsyncValidator {
       return Observable.throw("`remoteField` is undefined.");
     }
 
-    const dataObject = {};
+    const dataObject: any = {};
     if (
       this.remoteAdditionalFields &&
       this.remoteAdditionalFields !== undefined
@@ -71,23 +63,23 @@ export class RemoteValidatorDirective implements AsyncValidator {
           return this.doRemoteValidation(dataObject);
         })
         .subscribe(
-          (result: IRemoteValidationResult) => {
-            if (result.result) {
-              obs.next(null);
-            } else {
-              obs.next({
-                remoteValidation: {
-                  remoteValidationMessage: result.message
-                }
-              });
-            }
-
-            obs.complete();
-          },
-          error => {
+        (result: IRemoteValidationResult) => {
+          if (result.result) {
             obs.next(null);
-            obs.complete();
+          } else {
+            obs.next({
+              remoteValidation: {
+                remoteValidationMessage: result.message
+              }
+            });
           }
+
+          obs.complete();
+        },
+        () => {
+          obs.next(null);
+          obs.complete();
+        }
         );
     });
   }

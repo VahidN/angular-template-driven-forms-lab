@@ -12,7 +12,7 @@ export class ShowHtmlComponent implements OnInit {
   @ViewChild("dataContainer") dataContainer: ElementRef;
   htmlContent = "Template <script>alert(\"Hello!\")</script> <b>Syntax</b>";
   html: SafeHtml;
-  sanitizedHtml: string;
+  sanitizedHtml: string | null;
 
   constructor(private sanitizer: DomSanitizer) { }
 

@@ -9,6 +9,7 @@ import { CoreModule } from "./core/core.module";
 import { CustomPipeModule } from "./custom-pipe/custom-pipe.module";
 import { CustomTwoWayDataBindingModule } from "./custom-two-way-data-binding/custom-two-way-data-binding.module";
 import { CustomValidatorsModule } from "./custom-validators/custom-validators.module";
+import { DetectCommonErrorsModule } from "./detect-common-errors/detect-common-errors.module";
 import { EmployeeModule } from "./employee/employee.module";
 import { InjectionBeyondClassesModule } from "./injection-beyond-classes/injection-beyond-classes.module";
 import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-bootstrap-dialogs.module";
@@ -48,6 +49,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     CustomTwoWayDataBindingModule,
     InjectionBeyondClassesModule,
     TimersModule,
+    DetectCommonErrorsModule,
     AppRoutingModule
   ],
   providers: [

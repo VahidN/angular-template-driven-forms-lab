@@ -1,12 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
+import { ToastOptions, ToastyService } from "ng2-toasty";
 
-import { ProductsListService } from "./../products-list.service";
-import { PagedQueryModel } from "./../paged-query-model";
-import { PagedQueryResult } from "./../paged-query-result";
 import { AppProduct } from "./../app-product";
 import { GridColumn } from "./../grid-column";
-
-import { ToastyService, ToastOptions } from "ng2-toasty";
+import { PagedQueryModel } from "./../paged-query-model";
+import { PagedQueryResult } from "./../paged-query-result";
+import { ProductsListService } from "./../products-list.service";
 
 @Component({
   selector: "app-products-list",
@@ -28,7 +27,7 @@ export class ProductsListComponent implements OnInit {
 
   @ViewChild("readOnlyTemplate") readOnlyTemplate: TemplateRef<any>;
   @ViewChild("editTemplate") editTemplate: TemplateRef<any>;
-  selectedItem: AppProduct;
+  selectedItem: AppProduct | null;
   isNewRecord: boolean;
 
   constructor(
@@ -55,7 +54,7 @@ export class ProductsListComponent implements OnInit {
     this.getPagedProductsList();
   }
 
-  sortBy(columnName) {
+  sortBy(columnName: string) {
     if (this.queryModel.sortBy === columnName) {
       this.queryModel.isAscending = !this.queryModel.isAscending;
     } else {
@@ -75,6 +74,7 @@ export class ProductsListComponent implements OnInit {
     this.productsService
       .deleteAppProduct(item.productId)
       .subscribe(response => {
+        console.log(response);
         this.toastyService.success(
           <ToastOptions>{
             title: "Success!",
@@ -90,22 +90,27 @@ export class ProductsListComponent implements OnInit {
 
   saveItem() {
     console.log(this.selectedItem);
+    if (!this.selectedItem) {
+      return;
+    }
 
     if (this.isNewRecord) {
       this.productsService
         .addAppProduct(this.selectedItem)
         .subscribe((resp: AppProduct) => {
-          this.selectedItem.productId = resp.productId;
+          if (this.selectedItem) {
+            this.selectedItem.productId = resp.productId;
 
-          this.toastyService.success(
-            <ToastOptions>{
-              title: "Success!",
-              msg: `${this.selectedItem.productName} has been added!`,
-              theme: "bootstrap",
-              showClose: true,
-              timeout: 15000
-            }
-          );
+            this.toastyService.success(
+              <ToastOptions>{
+                title: "Success!",
+                msg: `${this.selectedItem.productName} has been added!`,
+                theme: "bootstrap",
+                showClose: true,
+                timeout: 15000
+              }
+            );
+          }
 
           this.isNewRecord = false;
           this.selectedItem = null;
@@ -114,16 +119,19 @@ export class ProductsListComponent implements OnInit {
       this.productsService
         .updateAppProduct(this.selectedItem.productId, this.selectedItem)
         .subscribe((resp: AppProduct) => {
-          this.toastyService.success(
-            <ToastOptions>{
-              title: "Success!",
-              msg: `${this.selectedItem.productName} has been updated!`,
-              theme: "bootstrap",
-              showClose: true,
-              timeout: 15000
-            }
-          );
-          this.selectedItem = null;
+          console.log(resp);
+          if (this.selectedItem) {
+            this.toastyService.success(
+              <ToastOptions>{
+                title: "Success!",
+                msg: `${this.selectedItem.productName} has been updated!`,
+                theme: "bootstrap",
+                showClose: true,
+                timeout: 15000
+              }
+            );
+            this.selectedItem = null;
+          }
         });
     }
   }

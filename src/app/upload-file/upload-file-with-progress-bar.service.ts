@@ -1,11 +1,4 @@
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpErrorResponse,
-  HttpRequest,
-  HttpProgressEvent,
-  HttpEvent
-} from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 
@@ -15,7 +8,7 @@ import { Ticket } from "./ticket";
 export class UploadFileWithProgressBarService {
   private baseUrl = "api/SimpleUpload";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   postTicket(ticket: Ticket, filesList: FileList): Observable<HttpEvent<any>> {
     if (!filesList || filesList.length === 0) {
@@ -26,7 +19,7 @@ export class UploadFileWithProgressBarService {
 
     for (const key in ticket) {
       if (ticket.hasOwnProperty(key)) {
-        formData.append(key, ticket[key]);
+        formData.append(key, (<any>ticket)[key]);
       }
     }
 

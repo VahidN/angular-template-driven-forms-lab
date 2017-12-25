@@ -38,6 +38,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to create a custom two way data binding.
 - How to create a custom dependency injection provider for the `APP_CONFIG`.
 - How to use timers in an angular application.
+- How to detect common JavaScript errors with TypeScript by improving its tsconfig.json file.
 
 How to run it
 -------------

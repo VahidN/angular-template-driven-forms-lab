@@ -1,8 +1,7 @@
-import { NgForm } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-
-import { ToastyService, ToastOptions } from "ng2-toasty";
+import { NgForm } from "@angular/forms";
 import { FileUploader, FileUploaderOptions } from "ng2-file-upload";
+import { ToastOptions, ToastyService } from "ng2-toasty";
 
 import { Ticket } from "./../ticket";
 
@@ -15,7 +14,7 @@ export class Ng2FileUploadTestComponent implements OnInit {
   fileUploader: FileUploader;
   model = new Ticket();
 
-  constructor(private toastyService: ToastyService) {}
+  constructor(private toastyService: ToastyService) { }
 
   ngOnInit() {
     this.initUploader();
@@ -49,9 +48,10 @@ export class Ng2FileUploadTestComponent implements OnInit {
     );
 
     this.fileUploader.onBuildItemForm = (fileItem, form) => {
+      console.log(fileItem);
       for (const key in this.model) {
         if (this.model.hasOwnProperty(key)) {
-          form.append(key, this.model[key]);
+          form.append(key, (<any>this.model)[key]);
         }
       }
     };
@@ -73,6 +73,7 @@ export class Ng2FileUploadTestComponent implements OnInit {
     };
 
     this.fileUploader.onWhenAddingFileFailed = (item, filter, options) => {
+      console.log(options);
       this.toastyService.error(
         <ToastOptions>{
           title: "Error!",
@@ -85,6 +86,7 @@ export class Ng2FileUploadTestComponent implements OnInit {
     };
 
     this.fileUploader.onErrorItem = (fileItem, response, status, headers) => {
+      console.log({ status, headers });
       this.toastyService.error(
         <ToastOptions>{
           title: "Error uploading file!",
@@ -97,6 +99,7 @@ export class Ng2FileUploadTestComponent implements OnInit {
     };
 
     this.fileUploader.onSuccessItem = (item, response, status, headers) => {
+      console.log({ item, response, status, headers });
       if (response) {
         const ticket = JSON.parse(response);
         console.log(`ticket:`, ticket);
@@ -108,8 +111,15 @@ export class Ng2FileUploadTestComponent implements OnInit {
     const value = "; " + document.cookie;
     const parts = value.split("; " + name + "=");
     if (parts.length === 2) {
-      return decodeURIComponent(parts.pop().split(";").shift());
+      const lastItem = parts.pop();
+      if (lastItem) {
+        const uri = lastItem.split(";").shift();
+        if (uri) {
+          return decodeURIComponent(uri);
+        }
+      }
     }
+    return "";
   }
 
   submitForm(form: NgForm) {

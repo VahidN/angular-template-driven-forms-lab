@@ -1,11 +1,7 @@
-import { ToastyService, ToastOptions } from "ng2-toasty";
+import { HttpErrorResponse, HttpEvent, HttpEventType } from "@angular/common/http";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import {
-  HttpEventType,
-  HttpEvent,
-  HttpErrorResponse
-} from "@angular/common/http";
+import { ToastOptions, ToastyService } from "ng2-toasty";
 
 import { Ticket } from "./../ticket";
 import { UploadFileWithProgressBarService } from "./../upload-file-with-progress-bar.service";
@@ -28,11 +24,11 @@ export class UploadFileWithProgressBarComponent implements OnInit {
   constructor(
     private uploadService: UploadFileWithProgressBarService,
     private toastyService: ToastyService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  fileChange(event) {
+  fileChange(event: any) {
     const filesList: FileList = event.target.files;
     console.log("fileChange() -> filesList", filesList);
   }
@@ -47,6 +43,10 @@ export class UploadFileWithProgressBarComponent implements OnInit {
     this.queueProgress = 0;
     this.isUploading = true;
     let startTime = Date.now();
+
+    if (!fileInput.files) {
+      return;
+    }
 
     this.uploadService.postTicket(this.model, fileInput.files).subscribe(
       (event: HttpEvent<any>) => {

@@ -1,6 +1,6 @@
-import { IThisModuleConfig, APP_CONFIG } from "./../thismodule.config";
-import { Component, OnInit, Inject } from "@angular/core";
-import { inject } from "@angular/core/testing";
+import { Component, Inject, OnInit } from "@angular/core";
+
+import { APP_CONFIG, IThisModuleConfig } from "./../thismodule.config";
 
 @Component({
   selector: "app-test-providers",

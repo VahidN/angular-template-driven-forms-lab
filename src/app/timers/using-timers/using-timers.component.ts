@@ -1,13 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs/Observable";
 import "rxjs/add/observable/interval";
 import "rxjs/add/observable/never";
 import "rxjs/add/observable/timer";
-import "rxjs/add/operator/timeInterval";
 import "rxjs/add/operator/pluck";
+import "rxjs/add/operator/timeInterval";
 
-import { Subscription } from "rxjs/Subscription";
+import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: "app-using-timers",
@@ -58,7 +58,7 @@ export class UsingTimersComponent implements OnInit {
       .map(x => x.value + ":" + x.interval)
       .take(5);
 
-    const subscription = source.subscribe(
+    source.subscribe(
       x => console.log("Next timeInterval: " + x),
       err => console.log("Error: " + err),
       () => console.log("Completed")
@@ -71,7 +71,7 @@ export class UsingTimersComponent implements OnInit {
       .pluck("interval")
       .take(5);
 
-    const subscription = source.subscribe(
+    source.subscribe(
       x => console.log("Next interval: " + x),
       err => console.log("Error: " + err),
       () => console.log("Completed")
@@ -84,12 +84,12 @@ export class UsingTimersComponent implements OnInit {
 
     this.pauser
       .switchMap(paused => paused ? Observable.never() : this.tickerSource).
-      subscribe(t => this.tickerFunc(t));
+      subscribe((t: any) => this.tickerFunc(t));
 
     this.pauser.next(false); // resume
   }
 
-  tickerFunc(tick) {
+  tickerFunc(tick: number) {
     this.tick = tick;
   }
 

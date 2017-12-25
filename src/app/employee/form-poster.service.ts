@@ -1,10 +1,5 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders
-} from "@angular/common/http";
-
 import { Observable } from "rxjs/Observable";
 
 import { Employee } from "./employee";
@@ -13,7 +8,7 @@ import { Employee } from "./employee";
 export class FormPosterService {
   private baseUrl = "api/employee";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
@@ -25,7 +20,7 @@ export class FormPosterService {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http
       .post(this.baseUrl, body, { headers: headers })
-      .map(response => response["fields"] || {})
+      .map((response: any) => response["fields"] || {})
       .catch(this.handleError);
   }
 

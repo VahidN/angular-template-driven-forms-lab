@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { NgForm } from "@angular/forms";
-
 import { Employee } from "app/employee/employee";
+
 import { FormPosterService } from "../form-poster.service";
 
 @Component({
@@ -10,11 +10,11 @@ import { FormPosterService } from "../form-poster.service";
   styleUrls: ["./employee-register.component.css"]
 })
 export class EmployeeRegisterComponent implements OnInit {
-  languages = [];
+  languages: string[] = [];
   model = new Employee("Vahid", "N", true, "FullTime", "default");
   hasPrimaryLanguageError = false;
 
-  constructor(private formPoster: FormPosterService) {}
+  constructor(private formPoster: FormPosterService) { }
 
   ngOnInit() {
     this.formPoster.getLanguages().subscribe(
@@ -33,7 +33,7 @@ export class EmployeeRegisterComponent implements OnInit {
     }
   }
 
-  validatePrimaryLanguage(value) {
+  validatePrimaryLanguage(value: any) {
     if (value === "default") {
       this.hasPrimaryLanguageError = true;
     } else {
@@ -54,8 +54,8 @@ export class EmployeeRegisterComponent implements OnInit {
     this.formPoster
       .postEmployeeForm(this.model)
       .subscribe(
-        data => console.log("success: ", data),
-        err => console.log("error: ", err)
+      data => console.log("success: ", data),
+      err => console.log("error: ", err)
       );
   }
 }
