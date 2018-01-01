@@ -12,6 +12,7 @@ import { CustomValidatorsModule } from "./custom-validators/custom-validators.mo
 import { DetectCommonErrorsModule } from "./detect-common-errors/detect-common-errors.module";
 import { EmployeeModule } from "./employee/employee.module";
 import { InjectionBeyondClassesModule } from "./injection-beyond-classes/injection-beyond-classes.module";
+import { LinqLikeMethodsModule } from "./linq-like-methods/linq-like-methods.module";
 import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-bootstrap-dialogs.module";
 import { ModelStateValidationModule } from "./model-state-validation/model-state-validation.module";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
@@ -50,6 +51,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     InjectionBeyondClassesModule,
     TimersModule,
     DetectCommonErrorsModule,
+    LinqLikeMethodsModule,
     AppRoutingModule
   ],
   providers: [

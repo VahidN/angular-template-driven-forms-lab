@@ -7,6 +7,8 @@ import { Component, OnInit } from "@angular/core";
 })
 export class DetectCommonErrorsTestComponent implements OnInit {
 
+  // zzz: Nullable<User>;
+
   constructor() {
   }
 
@@ -132,8 +134,111 @@ export class DetectCommonErrorsTestComponent implements OnInit {
   }
   */
 
+  // let foo: string = null; // Error!
+  // let foo: string | null = null; // Okay!
+
+  /*
+  testAssignedBeforeUseChecking() {
+    let x: number;
+    console.log(x);
+
+    let z: number | undefined;
+    console.log(z);
+  }*/
+
+  /*
+  testOptionalParametersAndProperties1(x?: number) {
+  }
+
+  testOptionalParametersAndProperties2(x?: number | undefined): void {
+
+  }
+*/
+
+  /*
+    f(x: number): string {
+      return x.toString();
+    }
+
+    testTypeGuards() {
+      let x: number | null | undefined;
+      if (x) {
+        this.f(x);  // Ok, type of x is number here
+      } else {
+        this.f(x);  // Error, type of x is number? here
+      }
+    }
+  */
+
+  /*
+  foo(options?: Options) {
+    if (options && options.location && options.location.x) {
+      const x = options.location.x;  // Type of x is number
+    }
+  }*/
+
+  /*
+  printUserInfo(user: User) {
+    console.log(`${user.name}, ${user.age.toString()}`);
+    // => error TS2532: Object is possibly 'undefined'.
+    console.log(`${user.name}, ${user.age!.toString()}`);
+    // => OK, you confirm that you're sure user.age is non-null.
+    if (user.age != null) {
+      console.log(`${user.name}, ${user.age.toString()}`);
+    }
+    // => OK, the if-condition checked that user.age is non-null.
+    console.log(user.name + ", " + user.age ? user.age.toString() : "age unknown");
+    // => Unfortunately TypeScript can't infer that age is non-null here.
+  }
+
+  getLength(s: string | null) {
+    return s ? s.length : 0;
+  }
+
+  getLength2(s?: string) {
+    return s ? s.length : 0;
+  }*/
+
+  /*
+  isNumber(n: any): n is number { // type guard
+    return typeof n === "number";
+  }
+
+  usedMb(usedBytes?: number): number | undefined {
+    return this.isNumber(usedBytes) ? (usedBytes / (1024 * 1024)) : undefined;
+  }
+
+  usedMb2(usedBytes?: number): number | undefined {
+    return usedBytes ? (usedBytes / (1024 * 1024)) : undefined;
+  }
+
+  formatUsedMb(): string {
+    //ERROR: TS2531: Object is possibly undefined
+    return this.usedMb(123).toFixed(0).toString();
+  }
+
+  formatUsed(): string {
+    const usedMb = this.usedMb(123);
+    return usedMb ? usedMb.toFixed(0).toString() : "";
+  }
+  */
 
 }
+
+export interface User {
+  name: string;
+  age?: number;
+}
+
+
+export interface Options {
+  location?: {
+    x?: number;
+    y?: number;
+  };
+}
+
+export type Nullable<T> = T | null;
 
 export interface Animal {
   name: string;
