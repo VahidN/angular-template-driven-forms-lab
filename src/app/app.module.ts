@@ -5,6 +5,7 @@ import { AngularSecurityModule } from "./angular-security/angular-security.modul
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserStorageSampleModule } from "./browser-storage-sample/browser-storage-sample.module";
+import { ClientIpAddressModule } from "./client-ip-address/client-ip-address.module";
 import { CoreModule } from "./core/core.module";
 import { CustomPipeModule } from "./custom-pipe/custom-pipe.module";
 import { CustomTwoWayDataBindingModule } from "./custom-two-way-data-binding/custom-two-way-data-binding.module";
@@ -52,6 +53,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     TimersModule,
     DetectCommonErrorsModule,
     LinqLikeMethodsModule,
+    ClientIpAddressModule,
     AppRoutingModule
   ],
   providers: [

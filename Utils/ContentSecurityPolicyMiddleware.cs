@@ -23,7 +23,7 @@ namespace AngularTemplateDrivenFormsLab.Utils
             {
               "default-src 'self'",
               "style-src 'self' 'unsafe-inline'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "script-src 'self' https://freegeoip.net/ 'unsafe-inline' 'unsafe-eval' ",
               "font-src 'self'",
               "img-src 'self' data:",
               "connect-src 'self'",
