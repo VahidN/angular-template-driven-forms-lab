@@ -25,7 +25,7 @@ namespace AngularTemplateDrivenFormsLab.Utils
               "style-src 'self' 'unsafe-inline'",
               "script-src 'self' https://freegeoip.net/ 'unsafe-inline' 'unsafe-eval' ",
               "font-src 'self'",
-              "img-src 'self' data:",
+              "img-src 'self' data: blob:",
               "connect-src 'self'",
               "media-src 'self'",
               "object-src 'self'",

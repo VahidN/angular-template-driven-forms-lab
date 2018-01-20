@@ -20,7 +20,7 @@ import { PageNotFoundComponent } from "./page-not-found/page-not-found.component
 import { ProductModule } from "./product/product.module";
 import { ReadAppConfigModule } from "./read-app-config/read-app-config.module";
 import {
-    ServiceComponentCommunicationModule,
+  ServiceComponentCommunicationModule,
 } from "./service-component-communication/service-component-communication.module";
 import { SharedModule } from "./shared/shared.module";
 import { SimpleGridModule } from "./simple-grid/simple-grid.module";
@@ -28,6 +28,7 @@ import { TimersModule } from "./timers/timers.module";
 import { UploadFileModule } from "./upload-file/upload-file.module";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 import { WelcomeComponent } from "./welcome/welcome.component";
+import { AngularHttpClientBlobModule } from "./angular-http-client-blob/angular-http-client-blob.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -54,6 +55,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     DetectCommonErrorsModule,
     LinqLikeMethodsModule,
     ClientIpAddressModule,
+    AngularHttpClientBlobModule,
     AppRoutingModule
   ],
   providers: [

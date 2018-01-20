@@ -1,4 +1,5 @@
-﻿import { ModalService } from "./modal.service";
+﻿import { WindowRefService } from "./window.service";
+import { ModalService } from "./modal.service";
 import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
@@ -39,7 +40,8 @@ import { BrowserStorageService } from "./browser-storage.service";
       deps: [AppConfigService],
       multi: true
     },
-    ModalService
+    ModalService,
+    WindowRefService
   ]
 })
 export class CoreModule {
