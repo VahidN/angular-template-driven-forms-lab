@@ -40,6 +40,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use timers in an angular application.
 - How to detect common JavaScript errors with TypeScript by improving its tsconfig.json file.
 - How to use LINQ like methods in TypeScript.
+- How to use the `freegeoip.net` service to get the client's IP address.
 
 How to run it
 -------------
