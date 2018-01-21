@@ -42,6 +42,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use LINQ like methods in TypeScript.
 - How to use the `freegeoip.net` service to get the client's IP address.
 - How to use the HttpClient "blob" response type to display an image.
+- How to display PDF files in Angular Apps.
 
 How to run it
 -------------

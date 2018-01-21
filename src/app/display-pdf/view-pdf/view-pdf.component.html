@@ -1,0 +1,16 @@
+<h1>Display PDF Files</h1>
+
+<div *ngIf="sanitizedPdfBlobResourceUrl">
+  <button class="btn btn-default" (click)="printPdf()">Print PDF</button>
+  <button class="btn btn-primary" (click)="showPdf()">Show PDF in a new tab</button>
+  <button class="btn btn-success" (click)="downloadPdf()">Download PDF</button>
+
+  <h4>using iframe</h4>
+  <iframe width="100%" height="600" [attr.src]="sanitizedPdfBlobResourceUrl" type="application/pdf"></iframe>
+  <h4>using object</h4>
+  <object [attr.data]="sanitizedPdfBlobResourceUrl" type="application/pdf" width="100%"
+    height="100%"></object>
+  <h4>usin embed</h4>
+  <embed [attr.src]="sanitizedPdfBlobResourceUrl" type="application/pdf" width="100%"
+    height="100%">
+</div>

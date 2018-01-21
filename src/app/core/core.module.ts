@@ -28,11 +28,12 @@ import { BrowserStorageService } from "./browser-storage.service";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
-      multi: true,
+      multi: true
     },
     {
       provide: ErrorHandler,
-      useClass: AppErrorHandler
+      useClass: AppErrorHandler,
+      multi: true
     },
     {
       provide: APP_INITIALIZER,

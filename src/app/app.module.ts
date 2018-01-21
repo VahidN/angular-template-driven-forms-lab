@@ -29,6 +29,7 @@ import { UploadFileModule } from "./upload-file/upload-file.module";
 import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/using-third-party-libraries.module";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { AngularHttpClientBlobModule } from "./angular-http-client-blob/angular-http-client-blob.module";
+import { DisplayPdfModule } from "./display-pdf/display-pdf.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -56,6 +57,7 @@ import { AngularHttpClientBlobModule } from "./angular-http-client-blob/angular-
     LinqLikeMethodsModule,
     ClientIpAddressModule,
     AngularHttpClientBlobModule,
+    DisplayPdfModule,
     AppRoutingModule
   ],
   providers: [

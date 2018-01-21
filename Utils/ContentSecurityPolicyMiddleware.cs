@@ -21,14 +21,14 @@ namespace AngularTemplateDrivenFormsLab.Utils
 
             string[] csp =
             {
-              "default-src 'self'",
+              "default-src 'self' blob:",
               "style-src 'self' 'unsafe-inline'",
               "script-src 'self' https://freegeoip.net/ 'unsafe-inline' 'unsafe-eval' ",
               "font-src 'self'",
               "img-src 'self' data: blob:",
               "connect-src 'self'",
               "media-src 'self'",
-              "object-src 'self'",
+              "object-src 'self' blob:",
               "report-uri /api/CspReport/Log" //TODO: Add api/CspReport/Log
             };
             context.Response.Headers.Add("Content-Security-Policy", string.Join("; ", csp));
