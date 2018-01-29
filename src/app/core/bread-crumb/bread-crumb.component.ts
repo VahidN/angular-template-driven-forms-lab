@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
 import { BreadCrumb } from "./bread-crumb";
 import { Observable } from "rxjs/Observable";
@@ -13,6 +13,9 @@ export class BreadCrumbComponent implements OnInit {
 
   breadcrumbs$: Observable<BreadCrumb[]>;
 
+  @Input() homeLabel: string;
+  @Input() homeGlyphIcon: string;
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -25,21 +28,30 @@ export class BreadCrumbComponent implements OnInit {
   buildBreadCrumbs(route: ActivatedRoute, url: string = "", breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {
     const routeDataBreadCrumbKey = "breadcrumb";
     const routeConfig = route.routeConfig;
-    const path = routeConfig && routeConfig.path !== undefined ? routeConfig.path : "";
 
-    let label = path;
+    const path = routeConfig && routeConfig.path !== undefined ? routeConfig.path : "";
+    const nextUrl = `${url}${path}/`;
+
+    let breadcrumb: BreadCrumb = {
+      label: path,
+      url: nextUrl,
+      glyphIcon: ""
+    };
+
     if (url === "") {
-      label = "Home";
+      breadcrumb = {
+        label: this.homeLabel,
+        url: nextUrl,
+        glyphIcon: this.homeGlyphIcon
+      }
     } else if (routeConfig && routeConfig.data !== undefined) {
-      label = routeConfig.data[routeDataBreadCrumbKey];
+      breadcrumb = routeConfig.data[routeDataBreadCrumbKey] as BreadCrumb;
+      if (breadcrumb.url === undefined) {
+        breadcrumb.url = nextUrl;
+      }
     }
 
-    const nextUrl = `${url}${path}/`;
-    const breadcrumb: BreadCrumb = {
-      label: label,
-      url: nextUrl
-    };
-    console.log("breadcrumb", { path: path, label: label, url: nextUrl, route: route });
+    console.log("breadcrumb", { path: path, breadcrumb: breadcrumb, route: route });
     const newBreadcrumbs = [...breadcrumbs, breadcrumb];
     if (route.firstChild) {
       return this.buildBreadCrumbs(route.firstChild, nextUrl, newBreadcrumbs);

@@ -1,5 +1,8 @@
 <ol class="breadcrumb">
   <li *ngFor="let breadcrumb of breadcrumbs$ | async" class="breadcrumb-item">
-    <a [routerLink]="[breadcrumb.url]">{{ breadcrumb.label }}</a>
+    <a [routerLink]="[breadcrumb.url]">
+      <span *ngIf="breadcrumb.glyphIcon" [class]='breadcrumb.glyphIcon' aria-hidden='true'></span>
+      {{ breadcrumb.label }}
+    </a>
   </li>
 </ol>

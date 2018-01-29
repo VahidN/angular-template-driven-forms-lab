@@ -1,4 +1,5 @@
 ﻿export interface BreadCrumb {
   label: string;
-  url: string;
+  url?: string;
+  glyphIcon?: string;
 };
