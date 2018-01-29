@@ -81,11 +81,15 @@
           <li role="menuitem" routerLinkActive="active">
             <a [routerLink]="['/viewPdf']">View PDF</a>
           </li>
+          <li role="menuitem" routerLinkActive="active">
+            <a [routerLink]="['/breadCrumbTest']">BreadCrumb</a>
+          </li>
         </ul>
       </li>
     </ul>
   </div>
 </nav>
 <div class="container">
+  <app-bread-crumb></app-bread-crumb>
   <router-outlet></router-outlet>
 </div>

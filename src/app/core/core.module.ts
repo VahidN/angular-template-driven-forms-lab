@@ -1,4 +1,5 @@
-﻿import { WindowRefService } from "./window.service";
+﻿import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
+import { WindowRefService } from "./window.service";
 import { ModalService } from "./modal.service";
 import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
 import { CommonModule } from "@angular/common";
@@ -17,9 +18,11 @@ import { BrowserStorageService } from "./browser-storage.service";
   imports: [CommonModule, RouterModule],
   exports: [
     // components that are used in app.component.ts will be listed here.
+    BreadCrumbComponent
   ],
   declarations: [
     // components that are used in app.component.ts will be listed here.
+    BreadCrumbComponent
   ],
   providers: [
     // global singleton services of the whole app will be listed here.
@@ -32,8 +35,7 @@ import { BrowserStorageService } from "./browser-storage.service";
     },
     {
       provide: ErrorHandler,
-      useClass: AppErrorHandler,
-      multi: true
+      useClass: AppErrorHandler
     },
     {
       provide: APP_INITIALIZER,

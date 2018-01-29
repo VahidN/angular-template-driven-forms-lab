@@ -30,6 +30,7 @@ import { UsingThirdPartyLibrariesModule } from "./using-third-party-libraries/us
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { AngularHttpClientBlobModule } from "./angular-http-client-blob/angular-http-client-blob.module";
 import { DisplayPdfModule } from "./display-pdf/display-pdf.module";
+import { BreadCrumbSampleModule } from "./bread-crumb-sample/bread-crumb-sample.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -58,6 +59,7 @@ import { DisplayPdfModule } from "./display-pdf/display-pdf.module";
     ClientIpAddressModule,
     AngularHttpClientBlobModule,
     DisplayPdfModule,
+    BreadCrumbSampleModule,
     AppRoutingModule
   ],
   providers: [
