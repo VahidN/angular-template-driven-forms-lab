@@ -44,6 +44,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use the HttpClient "blob" response type to display an image.
 - How to display PDF files in Angular Apps.
 - How to add BreadCrumbs to our Angular App.
+- How to optimize your Angular App for search engine and other crawlers.
 
 How to run it
 -------------

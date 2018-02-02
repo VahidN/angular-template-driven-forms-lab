@@ -1,7 +1,4 @@
-﻿import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
-import { WindowRefService } from "./window.service";
-import { ModalService } from "./modal.service";
-import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
+﻿import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -13,6 +10,10 @@ import { AppErrorHandler } from "./../app.error-handler";
 import { LoaderInterceptorService } from "./interceptors/loader-interceptor.service";
 import { AppConfigService } from "./app-config.service";
 import { BrowserStorageService } from "./browser-storage.service";
+import { SeoService } from "./seo-service";
+import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
+import { WindowRefService } from "./window.service";
+import { ModalService } from "./modal.service";
 
 @NgModule({
   imports: [CommonModule, RouterModule],
@@ -44,7 +45,8 @@ import { BrowserStorageService } from "./browser-storage.service";
       multi: true
     },
     ModalService,
-    WindowRefService
+    WindowRefService,
+    SeoService
   ]
 })
 export class CoreModule {

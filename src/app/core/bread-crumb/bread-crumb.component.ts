@@ -45,9 +45,12 @@ export class BreadCrumbComponent implements OnInit {
         glyphIcon: this.homeGlyphIcon
       }
     } else if (routeConfig && routeConfig.data !== undefined) {
-      breadcrumb = routeConfig.data[routeDataBreadCrumbKey] as BreadCrumb;
-      if (breadcrumb.url === undefined) {
-        breadcrumb.url = nextUrl;
+      const definedBreadcrumb = routeConfig.data[routeDataBreadCrumbKey] as BreadCrumb;
+      if (definedBreadcrumb !== undefined) {
+        if (definedBreadcrumb.url === undefined) {
+          definedBreadcrumb.url = nextUrl;
+        }
+        breadcrumb = definedBreadcrumb;
       }
     }
 

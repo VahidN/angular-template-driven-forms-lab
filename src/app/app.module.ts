@@ -31,6 +31,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
 import { AngularHttpClientBlobModule } from "./angular-http-client-blob/angular-http-client-blob.module";
 import { DisplayPdfModule } from "./display-pdf/display-pdf.module";
 import { BreadCrumbSampleModule } from "./bread-crumb-sample/bread-crumb-sample.module";
+import { SeoModule } from "./seo/seo.module";
 
 @NgModule({
   declarations: [AppComponent, WelcomeComponent, PageNotFoundComponent],
@@ -60,6 +61,7 @@ import { BreadCrumbSampleModule } from "./bread-crumb-sample/bread-crumb-sample.
     AngularHttpClientBlobModule,
     DisplayPdfModule,
     BreadCrumbSampleModule,
+    SeoModule,
     AppRoutingModule
   ],
   providers: [
