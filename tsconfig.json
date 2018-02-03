@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+	"strict": true,                           /* Enable all strict type-checking options. */
     "noImplicitReturns": true,
     "allowUnreachableCode": false,
     "noUnusedLocals": true,
