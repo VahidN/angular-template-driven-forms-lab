@@ -8,9 +8,9 @@ declare var jsSHA: any;
   styleUrls: ["./untyped-sha.component.css"]
 })
 export class UntypedShaComponent implements OnInit {
-  hash: String;
+  hash: String | null = null;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     const shaObj = new jsSHA("SHA-512", "TEXT");

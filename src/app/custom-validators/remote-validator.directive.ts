@@ -16,9 +16,9 @@ import { Subject } from "rxjs/Subject";
   ]
 })
 export class RemoteValidatorDirective implements AsyncValidator {
-  @Input("remote-url") remoteUrl: string;
-  @Input("remote-field") remoteField: string;
-  @Input("remote-additional-fields") remoteAdditionalFields: string;
+  @Input("remote-url") remoteUrl: string | null = null;
+  @Input("remote-field") remoteField: string | null = null;
+  @Input("remote-additional-fields") remoteAdditionalFields: string | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -59,32 +59,39 @@ export class RemoteValidatorDirective implements AsyncValidator {
         .debounceTime(debounceTime)
         .distinctUntilChanged()
         .flatMap(term => {
+          if (!this.remoteField || this.remoteField === undefined) {
+            return Observable.throw("`remoteField` is undefined.");
+          }
           dataObject[this.remoteField] = term;
           return this.doRemoteValidation(dataObject);
         })
         .subscribe(
-        (result: IRemoteValidationResult) => {
-          if (result.result) {
-            obs.next(null);
-          } else {
-            obs.next({
-              remoteValidation: {
-                remoteValidationMessage: result.message
-              }
-            });
-          }
+          (result: IRemoteValidationResult) => {
+            if (result.result) {
+              obs.next(null);
+            } else {
+              obs.next({
+                remoteValidation: {
+                  remoteValidationMessage: result.message
+                }
+              });
+            }
 
-          obs.complete();
-        },
-        () => {
-          obs.next(null);
-          obs.complete();
-        }
+            obs.complete();
+          },
+          () => {
+            obs.next(null);
+            obs.complete();
+          }
         );
     });
   }
 
   private doRemoteValidation(data: any): Observable<IRemoteValidationResult> {
+    if (!this.remoteUrl || this.remoteUrl === undefined) {
+      return Observable.throw("`remoteUrl` is undefined.");
+    }
+
     const headers = new HttpHeaders({ "Content-Type": "application/json" }); // for ASP.NET MVC
     return this.http
       .post<IRemoteValidationResult>(this.remoteUrl, JSON.stringify(data), {

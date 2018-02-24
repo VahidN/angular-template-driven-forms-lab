@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewEncapsulation, Input } from "@angular/core";
+import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { BreadCrumb } from "./bread-crumb";
 import { Observable } from "rxjs/Observable";
+
+import { BreadCrumb } from "./bread-crumb";
 
 @Component({
   selector: "app-bread-crumb",
@@ -11,10 +12,10 @@ import { Observable } from "rxjs/Observable";
 })
 export class BreadCrumbComponent implements OnInit {
 
-  breadcrumbs$: Observable<BreadCrumb[]>;
+  breadcrumbs$: Observable<BreadCrumb[]> | null = null;
 
-  @Input() homeLabel: string;
-  @Input() homeGlyphIcon: string;
+  @Input() homeLabel: string | null = null;
+  @Input() homeGlyphIcon: string | null = null;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -40,9 +41,9 @@ export class BreadCrumbComponent implements OnInit {
 
     if (url === "") {
       breadcrumb = {
-        label: this.homeLabel,
+        label: this.homeLabel ? this.homeLabel : "",
         url: nextUrl,
-        glyphIcon: this.homeGlyphIcon
+        glyphIcon: this.homeGlyphIcon ? this.homeGlyphIcon : ""
       }
     } else if (routeConfig && routeConfig.data !== undefined) {
       const definedBreadcrumb = routeConfig.data[routeDataBreadCrumbKey] as BreadCrumb;

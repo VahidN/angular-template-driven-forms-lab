@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-
 import * as jsSHA from "jssha";
 
 @Component({
@@ -8,9 +7,9 @@ import * as jsSHA from "jssha";
   styleUrls: ["./typed-sha.component.css"]
 })
 export class TypedShaComponent implements OnInit {
-  hash: String;
+  hash: string | null = null;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     const shaObj = new jsSHA("SHA-512", "TEXT");

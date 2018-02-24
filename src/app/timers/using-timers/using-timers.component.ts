@@ -16,11 +16,11 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class UsingTimersComponent implements OnInit {
 
-  private intervalSubscription: Subscription;
+  private intervalSubscription: Subscription | null = null;
   interval = 0;
-  countdown: number;
+  countdown = 0;
 
-  tick: number;
+  tick = 0;
   pauser = new Subject();
   tickerSource = new Subject();
 
@@ -39,7 +39,9 @@ export class UsingTimersComponent implements OnInit {
   }
 
   stopInterval() {
-    this.intervalSubscription.unsubscribe();
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+    }
   }
 
   startCountdownTimer() {

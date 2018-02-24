@@ -10,8 +10,8 @@ export class ConfirmModalComponent {
   args: {
     title: string;
     message: string;
-  };
+  } | null = null;
 
-  close: (val?: any) => void;
+  close!: (val?: any) => void;
 
 }

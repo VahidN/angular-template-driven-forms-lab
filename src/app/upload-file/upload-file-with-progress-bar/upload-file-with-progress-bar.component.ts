@@ -12,14 +12,14 @@ import { UploadFileWithProgressBarService } from "./../upload-file-with-progress
   styleUrls: ["./upload-file-with-progress-bar.component.css"]
 })
 export class UploadFileWithProgressBarComponent implements OnInit {
-  @ViewChild("screenshotInput") screenshotInput: ElementRef;
+  @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   model = new Ticket();
 
-  queueProgress: number;
-  isUploading: boolean;
-  uploadTimeRemaining: number;
-  uploadTimeElapsed: number;
-  uploadSpeed: number;
+  queueProgress = 0;
+  isUploading = false;
+  uploadTimeRemaining = 0;
+  uploadTimeElapsed = 0;
+  uploadSpeed = 0;
 
   constructor(
     private uploadService: UploadFileWithProgressBarService,
@@ -36,6 +36,10 @@ export class UploadFileWithProgressBarComponent implements OnInit {
   submitForm(form: NgForm) {
     console.log("this.model", this.model);
     console.log("form.value", form.value);
+
+    if (!this.screenshotInput) {
+      throw new Error("this.screenshotInput is null");
+    }
 
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     console.log("fileInput.files", fileInput.files);

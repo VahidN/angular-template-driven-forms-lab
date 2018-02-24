@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 
 @Component({
   selector: "app-child",
@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 })
 export class ChildComponent implements OnInit {
 
-  @Input() amount: number;
+  @Input() amount = 0;
   @Output() amountChange = new EventEmitter();
 
   constructor() { }

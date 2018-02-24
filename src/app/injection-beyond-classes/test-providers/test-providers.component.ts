@@ -9,7 +9,7 @@ import { APP_CONFIG, IThisModuleConfig } from "./../thismodule.config";
 })
 export class TestProvidersComponent implements OnInit {
 
-  fromRandomFactory: string;
+  fromRandomFactory: string | null = null;
 
   constructor(
     @Inject("API_BASE_HREF") public apiBaseHref: string,

@@ -14,7 +14,7 @@ import { ProductsListService } from "./../products-list.service";
 })
 export class ProductsListComponent implements OnInit {
   itemsPerPage = [10, 15, 20, 25, 30, 40, 50, 100];
-  numberOfPages: number;
+  numberOfPages = 0;
   isLoading = false;
   queryModel = new PagedQueryModel("productId", true, 1, 10, "", "");
   queryResult = new PagedQueryResult<AppProduct>(0, []);
@@ -25,10 +25,10 @@ export class ProductsListComponent implements OnInit {
     new GridColumn("Available", "isAvailable", true)
   ];
 
-  @ViewChild("readOnlyTemplate") readOnlyTemplate: TemplateRef<any>;
-  @ViewChild("editTemplate") editTemplate: TemplateRef<any>;
-  selectedItem: AppProduct | null;
-  isNewRecord: boolean;
+  @ViewChild("readOnlyTemplate") readOnlyTemplate: TemplateRef<any> | null = null;
+  @ViewChild("editTemplate") editTemplate: TemplateRef<any> | null = null;
+  selectedItem: AppProduct | null = null;
+  isNewRecord = false;
 
   constructor(
     private productsService: ProductsListService,

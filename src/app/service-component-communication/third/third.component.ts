@@ -1,6 +1,7 @@
-import { SampleService } from "./../sample.service";
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs/Subscription";
+
+import { SampleService } from "./../sample.service";
 
 @Component({
   selector: "app-third",
@@ -9,8 +10,8 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class ThirdComponent implements OnInit, OnDestroy {
 
-  message: string;
-  sampleSubscription: Subscription;
+  message: string | null = null;
+  sampleSubscription: Subscription | null = null;
 
   constructor(private sampleService: SampleService) { }
 

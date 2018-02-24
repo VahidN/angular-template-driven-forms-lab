@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { MovieService } from "./../movie.service";
-import { NgForm } from "@angular/forms";
-import { Movie } from "./../movie";
 import { Component, OnInit } from "@angular/core";
+import { NgForm } from "@angular/forms";
+
+import { Movie } from "./../movie";
+import { MovieService } from "./../movie.service";
 
 @Component({
   selector: "app-model-state-validation-test",
@@ -12,7 +13,7 @@ import { Component, OnInit } from "@angular/core";
 export class ModelStateValidationTestComponent implements OnInit {
 
   model = new Movie("", "", 0, "");
-  successfulSave: boolean;
+  successfulSave = false;
   errors: string[] = [];
 
   constructor(private movieService: MovieService) { }

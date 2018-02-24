@@ -9,14 +9,17 @@ import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 })
 export class ShowHtmlComponent implements OnInit {
 
-  @ViewChild("dataContainer") dataContainer: ElementRef;
+  @ViewChild("dataContainer") dataContainer: ElementRef | null = null;
   htmlContent = "Template <script>alert(\"Hello!\")</script> <b>Syntax</b>";
-  html: SafeHtml;
-  sanitizedHtml: string | null;
+  html: SafeHtml | null = null;
+  sanitizedHtml: string | null = null;
 
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
+    if (!this.dataContainer) {
+      throw new Error("this.dataContainer is null");
+    }
     this.dataContainer.nativeElement.innerHTML = "nativeElement <script>alert(\"Hello!\")</script> <b>Syntax</b>";
     this.html = this.sanitizer.bypassSecurityTrustHtml(
       "<b>From DomSanitizer</b><script>alert(\"Hello bypassSecurityTrustHtml!\");</script>");

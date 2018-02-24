@@ -11,7 +11,7 @@ import { UploadFileSimpleService } from "./../upload-file-simple.service";
   styleUrls: ["./upload-file-simple.component.css"]
 })
 export class UploadFileSimpleComponent implements OnInit {
-  @ViewChild("screenshotInput") screenshotInput: ElementRef;
+  @ViewChild("screenshotInput") screenshotInput: ElementRef | null = null;
   model = new Ticket();
 
   constructor(
@@ -29,6 +29,10 @@ export class UploadFileSimpleComponent implements OnInit {
   submitForm(form: NgForm) {
     console.log("this.model", this.model);
     console.log("form.value", form.value);
+
+    if (!this.screenshotInput) {
+      throw new Error("this.screenshotInput is null.");
+    }
 
     const fileInput: HTMLInputElement = this.screenshotInput.nativeElement;
     console.log("fileInput.files", fileInput.files);

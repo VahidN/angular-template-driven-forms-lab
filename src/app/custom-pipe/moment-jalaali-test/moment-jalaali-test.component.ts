@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { JsonDatesService } from "./../json-dates.service";
-
 import * as momentJalaali from "moment-jalaali";
+
+import { JsonDatesService } from "./../json-dates.service";
 
 @Component({
   selector: "app-moment-jalaali-test",
@@ -9,12 +9,12 @@ import * as momentJalaali from "moment-jalaali";
   styleUrls: ["./moment-jalaali-test.component.css"]
 })
 export class MomentJalaaliTestComponent implements OnInit {
-  now: string;
-  nowLongDateFormat: string;
-  nowExtraLongDateFormat: string;
+  now: string | null = null;
+  nowLongDateFormat: string | null = null;
+  nowExtraLongDateFormat: string | null = null;
   dates: any[] = [];
 
-  constructor(private jsonDatesService: JsonDatesService) {}
+  constructor(private jsonDatesService: JsonDatesService) { }
 
   ngOnInit() {
     this.persianDateTests();

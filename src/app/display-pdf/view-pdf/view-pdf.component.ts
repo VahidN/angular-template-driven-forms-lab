@@ -1,7 +1,8 @@
-import { DownloadPdfDataService } from "./../download-pdf-data.service";
-import { WindowRefService } from "./../../core/window.service";
 import { Component, OnInit } from "@angular/core";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+
+import { WindowRefService } from "./../../core/window.service";
+import { DownloadPdfDataService } from "./../download-pdf-data.service";
 
 @Component({
   selector: "app-view-pdf",
@@ -10,9 +11,9 @@ import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 })
 export class ViewPdfComponent implements OnInit {
 
-  private nativeWindow: Window;
-  private pdfBlobUrl: string;
-  sanitizedPdfBlobResourceUrl: SafeResourceUrl;
+  private nativeWindow: Window | null = null;
+  private pdfBlobUrl: string | null = null;
+  sanitizedPdfBlobResourceUrl: SafeResourceUrl | null = null;
 
   constructor(private downloadService: DownloadPdfDataService,
     private windowRefService: WindowRefService, private sanitizer: DomSanitizer) { }
@@ -20,6 +21,9 @@ export class ViewPdfComponent implements OnInit {
   ngOnInit() {
     this.nativeWindow = this.windowRefService.nativeWindow;
     this.downloadService.getReport().subscribe(pdfDataBlob => {
+      if (!this.nativeWindow) {
+        throw new Error("this.nativeWindow is null");
+      }
       console.log("pdfDataBlob", pdfDataBlob);
       const urlCreator = this.nativeWindow.URL;
       this.pdfBlobUrl = urlCreator.createObjectURL(pdfDataBlob);
@@ -29,6 +33,9 @@ export class ViewPdfComponent implements OnInit {
   }
 
   printPdf() {
+    if (!this.pdfBlobUrl) {
+      throw new Error("this.pdfBlobUrl is null");
+    }
     const iframe = document.createElement("iframe");
     iframe.style.display = "none";
     iframe.src = this.pdfBlobUrl;
@@ -37,10 +44,19 @@ export class ViewPdfComponent implements OnInit {
   }
 
   showPdf() {
+    if (!this.pdfBlobUrl) {
+      throw new Error("this.pdfBlobUrl is null");
+    }
+    if (!this.nativeWindow) {
+      throw new Error("this.nativeWindow is null");
+    }
     this.nativeWindow.open(this.pdfBlobUrl);
   }
 
   downloadPdf() {
+    if (!this.pdfBlobUrl) {
+      throw new Error("this.pdfBlobUrl is null");
+    }
     const fileName = "test.pdf";
     const anchor = document.createElement("a");
     anchor.style.display = "none";

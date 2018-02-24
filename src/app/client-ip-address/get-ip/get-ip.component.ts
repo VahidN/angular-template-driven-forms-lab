@@ -10,7 +10,7 @@ import { JobService } from "./../job.service";
 })
 export class GetIpComponent implements OnInit {
 
-  clientIp: IP;
+  clientIp: IP | null = null;
 
   constructor(private jobService: JobService) { }
 

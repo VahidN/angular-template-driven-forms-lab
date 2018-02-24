@@ -1,6 +1,7 @@
-import { SampleService } from "./../sample.service";
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs/Subscription";
+
+import { SampleService } from "./../sample.service";
 
 @Component({
   selector: "app-first",
@@ -9,8 +10,8 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class FirstComponent implements OnInit, OnDestroy {
 
-  editedMsg: string;
-  sampleSubscription: Subscription;
+  editedMsg: string | null = null;
+  sampleSubscription: Subscription | null = null;
 
   constructor(private sampleService: SampleService) { }
 
@@ -21,10 +22,14 @@ export class FirstComponent implements OnInit, OnDestroy {
   }
 
   editMsg() {
-    this.sampleService.editMsg(this.editedMsg);
+    if (this.editedMsg) {
+      this.sampleService.editMsg(this.editedMsg);
+    }
   }
 
   ngOnDestroy() {
-    this.sampleSubscription.unsubscribe();
+    if (this.sampleSubscription) {
+      this.sampleSubscription.unsubscribe();
+    }
   }
 }

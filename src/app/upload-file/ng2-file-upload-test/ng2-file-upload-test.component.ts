@@ -11,7 +11,7 @@ import { Ticket } from "./../ticket";
   styleUrls: ["./ng2-file-upload-test.component.css"]
 })
 export class Ng2FileUploadTestComponent implements OnInit {
-  fileUploader: FileUploader;
+  fileUploader: FileUploader | null = null;
   model = new Ticket();
 
   constructor(private toastyService: ToastyService) { }
@@ -127,6 +127,9 @@ export class Ng2FileUploadTestComponent implements OnInit {
     console.log("form.value", form.value);
     console.log("this.fileUploader", this.fileUploader);
 
+    if (!this.fileUploader) {
+      throw new Error("this.fileUploader is null.");
+    }
     this.fileUploader.uploadAll();
 
     // NOTE: Upload multiple files in one request -> https://github.com/valor-software/ng2-file-upload/issues/671

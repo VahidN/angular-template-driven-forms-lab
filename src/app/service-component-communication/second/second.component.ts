@@ -1,6 +1,7 @@
-import { SampleService } from "./../sample.service";
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { Subscription } from "rxjs/Subscription";
+
+import { SampleService } from "./../sample.service";
 
 @Component({
   selector: "app-second",
@@ -9,8 +10,8 @@ import { Subscription } from "rxjs/Subscription";
 })
 export class SecondComponent implements OnInit, OnDestroy {
 
-  message: string;
-  sampleSubscription: Subscription;
+  message: string | null = null;
+  sampleSubscription: Subscription | null = null;
 
   constructor(private sampleService: SampleService) { }
 
@@ -21,6 +22,8 @@ export class SecondComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sampleSubscription.unsubscribe();
+    if (this.sampleSubscription) {
+      this.sampleSubscription.unsubscribe();
+    }
   }
 }

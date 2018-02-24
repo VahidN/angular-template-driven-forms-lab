@@ -1,7 +1,8 @@
-import { ModalService } from "./../../core/modal.service";
-import { ConfirmModalComponent } from "./../../shared/confirm-modal/confirm-modal.component";
 import { Component, OnInit, TemplateRef } from "@angular/core";
 import { BsModalRef, BsModalService } from "ngx-bootstrap";
+
+import { ModalService } from "./../../core/modal.service";
+import { ConfirmModalComponent } from "./../../shared/confirm-modal/confirm-modal.component";
 
 @Component({
   selector: "app-modal-dialog-test",
@@ -10,8 +11,8 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap";
 })
 export class ModalDialogTestComponent implements OnInit {
 
-  modalRef: BsModalRef;
-  confirmResult: string;
+  modalRef: BsModalRef | null = null;
+  confirmResult: string | null = null;
 
   constructor(
     private bsModalService: BsModalService,
@@ -26,7 +27,9 @@ export class ModalDialogTestComponent implements OnInit {
   }
 
   closeModal() {
-    this.modalRef.hide();
+    if (this.modalRef) {
+      this.modalRef.hide();
+    }
   }
 
   ngOnInit() {

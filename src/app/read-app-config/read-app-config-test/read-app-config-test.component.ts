@@ -1,5 +1,6 @@
-import { AppConfigService } from "./../../core/app-config.service";
 import { Component, OnInit } from "@angular/core";
+
+import { AppConfigService } from "./../../core/app-config.service";
 
 @Component({
   selector: "app-read-app-config-test",
@@ -8,7 +9,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class ReadAppConfigTestComponent implements OnInit {
 
-  host: string;
+  host: string | null = null;
 
   constructor(private appConfig: AppConfigService) { }
 

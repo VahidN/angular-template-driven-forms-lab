@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class AppConfigService {
 
-  private config: AppConfig;
+  private config: AppConfig | null = null;
 
   constructor(private http: HttpClient) { }
 
@@ -29,5 +29,5 @@ export class AppConfigService {
 }
 
 export class AppConfig {
-  host: string;
+  host: string | null = null;
 }
