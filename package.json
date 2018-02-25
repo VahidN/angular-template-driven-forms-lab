@@ -27,7 +27,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "3.3.7",
     "core-js": "^2.5.3",
     "jquery": "^3.2.1",
     "jssha": "^2.3.1",
