@@ -1,5 +1,5 @@
-import { BrowserStorageService } from "./../../core/browser-storage.service";
 import { Component, OnInit } from "@angular/core";
+import { BrowserStorageService } from "@app/core";
 
 @Component({
   selector: "app-browser-storage-sample-test",
