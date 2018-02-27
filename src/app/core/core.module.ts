@@ -1,20 +1,20 @@
-﻿import { NgModule, SkipSelf, Optional, ErrorHandler, APP_INITIALIZER } from "@angular/core";
+﻿import "./rxjs-operators";
+
 import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { APP_INITIALIZER, ErrorHandler, NgModule, Optional, SkipSelf } from "@angular/core";
+import { RouterModule } from "@angular/router";
+
+import { AppConfigService } from "./app-config.service";
+import { AppErrorHandler } from "./app.error-handler";
+import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
+import { BrowserStorageService } from "./browser-storage.service";
+import { LoaderInterceptorService } from "./interceptors/loader-interceptor.service";
+import { ModalService } from "./modal.service";
+import { SeoService } from "./seo-service";
+import { WindowRefService } from "./window.service";
 
 // import RxJs needed operators only once
-import "./rxjs-operators";
-
-import { AppErrorHandler } from "./../app.error-handler";
-import { LoaderInterceptorService } from "./interceptors/loader-interceptor.service";
-import { AppConfigService } from "./app-config.service";
-import { BrowserStorageService } from "./browser-storage.service";
-import { SeoService } from "./seo-service";
-import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
-import { WindowRefService } from "./window.service";
-import { ModalService } from "./modal.service";
-
 @NgModule({
   imports: [CommonModule, RouterModule],
   exports: [
@@ -50,7 +50,7 @@ import { ModalService } from "./modal.service";
   ]
 })
 export class CoreModule {
-  constructor( @Optional() @SkipSelf() core: CoreModule) {
+  constructor(@Optional() @SkipSelf() core: CoreModule) {
     if (core) {
       throw new Error("CoreModule should be imported ONLY in AppModule.");
     }
