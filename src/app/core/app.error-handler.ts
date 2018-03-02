@@ -30,8 +30,7 @@ export class AppErrorHandler extends ErrorHandler {
       );
     });
 
-    // IMPORTANT: Rethrow the error otherwise it gets swallowed
-    // throw error;
+    super.handleError(error);
   }
 
   getError(error: any): string {
