@@ -3,10 +3,10 @@
   <form #form="ngForm" (submit)="submitForm(form)" novalidate>
     <div class="form-group" [class.has-error]="description.invalid && description.touched">
       <label class="control-label">Description</label>
-      <input #description="ngModel" required type="text" class="form-control"
-        name="description" [(ngModel)]="model.description">
+      <input #description="ngModel" required type="text" class="form-control" name="description"
+        [(ngModel)]="model.description">
       <div *ngIf="description.invalid && description.touched">
-        <div class="alert alert-danger"  *ngIf="description.errors.required">
+        <div class="alert alert-danger"  *ngIf="description?.errors.required">
           description is required.
         </div>
       </div>
@@ -14,11 +14,11 @@
 
     <div class="form-group">
       <label class="control-label">Screenshot(s)</label>
-      <input required type="file" multiple ng2FileSelect [uploader]="fileUploader"
-        class="form-control" name="screenshot">
+      <input required type="file" multiple ng2FileSelect [uploader]="fileUploader" class="form-control"
+        name="screenshot">
     </div>
 
-    <div style="margin-bottom: 10px" *ngIf="fileUploader.queue.length">
+    <div style="margin-bottom: 10px" *ngIf="fileUploader?.queue?.length">
       <h3>Upload queue</h3>
       <p>Queue length: {{ fileUploader?.queue?.length }}</p>
       <table class="table">
@@ -32,8 +32,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of fileUploader.queue">
-            <td><strong>{{ item?.file?.name }}</strong></td>
+          <tr *ngFor="let item of fileUploader?.queue">
+            <td>
+              <strong>{{ item?.file?.name }}</strong>
+            </td>
             <td nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
             <td>
               <div class="progress" style="margin-bottom: 0;">
@@ -41,7 +43,9 @@
               </div>
             </td>
             <td class="text-center">
-              <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+              <span *ngIf="item.isError">
+                <i class="glyphicon glyphicon-remove"></i>
+              </span>
             </td>
             <td nowrap>
               <button type="button" class="btn btn-danger btn-xs" (click)="item.remove()">
@@ -59,7 +63,7 @@
             <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': fileUploader.progress + '%' }"></div>
           </div>
         </div>
-        <button type="button" class="btn btn-danger btn-s" (click)="fileUploader.clearQueue()"
+        <button type="button" class="btn btn-danger btn-s" (click)="fileUploader?.clearQueue()"
           [disabled]="!fileUploader.queue.length">
           <span class="glyphicon glyphicon-trash"></span> Remove all
         </button>
