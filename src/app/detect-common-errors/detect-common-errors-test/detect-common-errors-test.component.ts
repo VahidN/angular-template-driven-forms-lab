@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
+import { PonyModel } from "./../pony";
+
 @Component({
   selector: "app-detect-common-errors-test",
   templateUrl: "./detect-common-errors-test.component.html",
@@ -7,6 +9,7 @@ import { Component, OnInit } from "@angular/core";
 })
 export class DetectCommonErrorsTestComponent implements OnInit {
 
+  ponyModel: PonyModel = { name: "Pony1" };
   // zzz: Nullable<User>;
 
   constructor() {
