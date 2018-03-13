@@ -4,6 +4,7 @@ using AngularTemplateDrivenFormsLab.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -43,7 +44,12 @@ namespace AngularTemplateDrivenFormsLab
                 // new { controller = "Home", action = "Index" });
             });
             app.UseDefaultFiles();
-            app.UseStaticFiles();
+
+            var provider = new FileExtensionContentTypeProvider();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                ContentTypeProvider = provider
+            });
         }
     }
 }

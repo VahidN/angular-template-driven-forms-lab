@@ -1,0 +1,48 @@
+<h1>
+  Autocomplete
+</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Using flatMap</h2>
+  </div>
+  <div class="panel-body">
+    <label>Country: </label>
+    <input type="text" (input)="onSearch1Change($event.target.value)" />
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let country of countries1">
+        {{country}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Using switchMap</h2>
+  </div>
+  <div class="panel-body">
+    <label>Country: </label>
+    <input type="text" (input)="onSearch2Change($event.target.value)" />
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let country of countries2">
+        {{country}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Normal debounceTime</h2>
+  </div>
+  <div class="panel-body">
+    <label>Country: </label>
+    <input type="text" (input)="onSearch3Change($event.target.value)" />
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let country of countries3">
+        {{country}}
+      </li>
+    </ul>
+  </div>
+</div>

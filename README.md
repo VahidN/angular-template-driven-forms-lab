@@ -46,6 +46,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to add BreadCrumbs to our Angular App.
 - How to optimize your Angular App for search engine and other crawlers.
 - How to use absolute paths for module imports.
+- How to reduce the quantity of call back executions needed.
 
 How to run it
 -------------
