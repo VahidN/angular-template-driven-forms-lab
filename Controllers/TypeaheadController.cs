@@ -11,7 +11,7 @@ namespace AngularTemplateDrivenFormsLab.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> SearchCountries(string term)
         {
-            await Task.Delay(1000); // simulating an slow operation
+            await Task.Delay(1000); // simulating a slow operation
 
             var items = new[]
                 {
