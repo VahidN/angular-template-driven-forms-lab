@@ -40,7 +40,9 @@ export class ViewPdfComponent implements OnInit {
     iframe.style.display = "none";
     iframe.src = this.pdfBlobUrl;
     document.body.appendChild(iframe);
-    iframe.contentWindow.print();
+    if (iframe.contentWindow) {
+      // iframe.contentWindow.print(); // needs 2.8.2
+    }
   }
 
   showPdf() {
