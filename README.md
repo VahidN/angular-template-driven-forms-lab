@@ -51,6 +51,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 How to run it
 -------------
 
+- Update all of the outdated global dependencies using the `npm update -g` command.
 - Install the `Angular-CLI`.
 - Open two command prompt consoles and then navigate to the root of the current app.
 - Run the following commands in the first one:
