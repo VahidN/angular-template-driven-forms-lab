@@ -1,7 +1,6 @@
-export class GridColumn {
-  constructor(
-    public title: string,
-    public propertyName: string,
-    public isSortable: boolean
-  ) {}
+export interface GridColumn {
+  title: string;
+  propertyName: string;
+  isSortable: boolean;
+  isVisible: boolean;
 }

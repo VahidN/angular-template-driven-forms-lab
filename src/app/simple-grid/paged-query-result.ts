@@ -1,3 +1,4 @@
-export class PagedQueryResult<T> {
-  constructor(public totalItems: number, public items: T[]) {}
+export interface PagedQueryResult<T> {
+  totalItems: number;
+  items: T[];
 }

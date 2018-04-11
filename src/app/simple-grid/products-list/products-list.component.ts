@@ -16,13 +16,43 @@ export class ProductsListComponent implements OnInit {
   itemsPerPage = [10, 15, 20, 25, 30, 40, 50, 100];
   numberOfPages = 0;
   isLoading = false;
-  queryModel = new PagedQueryModel("productId", true, 1, 10, "", "");
-  queryResult = new PagedQueryResult<AppProduct>(0, []);
+  queryModel: PagedQueryModel = {
+    sortBy: "productId",
+    isAscending: true,
+    page: 1,
+    pageSize: 10,
+    filterByColumn: "",
+    filterByValue: ""
+  };
+  queryResult: PagedQueryResult<AppProduct> = {
+    totalItems: 0,
+    items: []
+  };
   columns: GridColumn[] = [
-    new GridColumn("Id", "productId", true),
-    new GridColumn("Name", "productName", true),
-    new GridColumn("Price", "price", true),
-    new GridColumn("Available", "isAvailable", true)
+    {
+      title: "Id",
+      propertyName: "productId",
+      isSortable: true,
+      isVisible: true
+    },
+    {
+      title: "Name",
+      propertyName: "productName",
+      isSortable: true,
+      isVisible: true
+    },
+    {
+      title: "Price",
+      propertyName: "price",
+      isSortable: true,
+      isVisible: true
+    },
+    {
+      title: "Available",
+      propertyName: "isAvailable",
+      isSortable: true,
+      isVisible: true
+    }
   ];
 
   @ViewChild("readOnlyTemplate") readOnlyTemplate: TemplateRef<any> | null = null;
@@ -142,7 +172,12 @@ export class ProductsListComponent implements OnInit {
   }
 
   addItem() {
-    this.selectedItem = new AppProduct(0, "", 0, false);
+    this.selectedItem = {
+      productId: 0,
+      productName: "",
+      price: 0,
+      isAvailable: false
+    };
     this.isNewRecord = true;
 
     this.queryResult.items.push(this.selectedItem);

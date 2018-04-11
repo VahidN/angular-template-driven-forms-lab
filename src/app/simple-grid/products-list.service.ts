@@ -1,20 +1,16 @@
-import { Observable } from "rxjs/Observable";
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders
-} from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/Observable";
 
+import { AppProduct } from "./app-product";
 import { PagedQueryModel } from "./paged-query-model";
 import { PagedQueryResult } from "./paged-query-result";
-import { AppProduct } from "./app-product";
 
 @Injectable()
 export class ProductsListService {
   private baseUrl = "api/Product";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getPagedProductsList(
     queryModel: PagedQueryModel
@@ -24,10 +20,10 @@ export class ProductsListService {
         `${this.baseUrl}/GetPagedProducts?${this.toQueryString(queryModel)}`
       )
       .map(result => {
-        return new PagedQueryResult<AppProduct>(
-          result.totalItems,
-          result.items
-        );
+        return <PagedQueryResult<AppProduct>>{
+          totalItems: result.totalItems,
+          items: result.items
+        };
       });
   }
 

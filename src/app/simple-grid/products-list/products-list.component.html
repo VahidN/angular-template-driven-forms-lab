@@ -22,28 +22,47 @@
   />
 </div>
 
-<div>
+<div dropdown class="dropdown">
+  <button dropdownToggle class="btn btn-default dropdown-toggle" (click)="false" type="button"
+    id="visibleColumns" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Select visible columns
+    <span class="caret"></span>
+  </button>
+  <ul *dropdownMenu class="dropdown-menu" aria-labelledby="visibleColumns">
+    <li *ngFor="let column of columns">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="visibleColumn" [(ngModel)]="column.isVisible"> {{column.title}}
+        </label>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div style="margin-top: 10px;">
   <table class="table table-striped table-hover table-bordered table-condensed">
     <thead>
       <tr>
         <th class="text-center" style="width:3%">#</th>
-        <th *ngFor="let column of columns" class="text-center">
-          <div *ngIf="column.isSortable" (click)="sortBy(column.propertyName)" style="cursor: pointer">
-            {{ column.title }}
-            <i *ngIf="queryModel.sortBy === column.propertyName" class="glyphicon" [class.glyphicon-sort-by-order]="queryModel.isAscending"
-              [class.glyphicon-sort-by-order-alt]="!queryModel.isAscending"></i>
-          </div>
-          <div *ngIf="!column.isSortable" style="cursor: pointer">
-            {{ column.title }}
-          </div>
-        </th>
+        <ng-container *ngFor="let column of columns">
+          <th *ngIf="column.isVisible" class="text-center">
+            <div *ngIf="column.isSortable" (click)="sortBy(column.propertyName)" style="cursor: pointer">
+              {{ column.title }}
+              <i *ngIf="queryModel.sortBy === column.propertyName" class="glyphicon" [class.glyphicon-sort-by-order]="queryModel.isAscending"
+                [class.glyphicon-sort-by-order-alt]="!queryModel.isAscending"></i>
+            </div>
+            <div *ngIf="!column.isSortable" style="cursor: pointer">
+              {{ column.title }}
+            </div>
+          </th>
+        </ng-container>
         <th style="width:3%"></th>
         <th style="width:3%"></th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let item of queryResult.items; let i = index">
-        <ng-container [ngTemplateOutlet]="loadTemplate(item)" [ngTemplateOutletContext]="{ $implicit: item, idx: i }"></ng-container>
+        <ng-container [ngTemplateOutlet]="loadTemplate(item)" [ngTemplateOutletContext]="{ $implicit: item, idx: i, columns: columns }"></ng-container>
       </tr>
     </tbody>
   </table>
@@ -78,12 +97,12 @@
   </div>
 
   <!--The Html Template for Read-Only Rows-->
-  <ng-template #readOnlyTemplate let-item let-i="idx">
+  <ng-template #readOnlyTemplate let-item let-i="idx" let-columns="columns">
     <td class="text-center">{{ queryModel.pageSize * (queryModel.page - 1) + i + 1 }}</td>
-    <td class="text-center">{{ item.productId }}</td>
-    <td class="text-center">{{ item.productName }}</td>
-    <td class="text-center">{{ item.price | number:'.0' }}</td>
-    <td class="text-center">
+    <td *ngIf="columns[0].isVisible" class="text-center">{{ item.productId }}</td>
+    <td *ngIf="columns[1].isVisible" class="text-center">{{ item.productName }}</td>
+    <td *ngIf="columns[2].isVisible" class="text-center">{{ item.price | number:'.0' }}</td>
+    <td *ngIf="columns[3].isVisible" class="text-center">
       <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
         disabled="disabled" />
     </td>
@@ -100,14 +119,14 @@
   <!--The Html Template for Editable Rows-->
   <ng-template #editTemplate let-item let-i="idx">
     <td class="text-center">{{ queryModel.pageSize * (queryModel.page - 1) + i + 1 }}</td>
-    <td class="text-center">{{ item.productId }}</td>
-    <td class="text-center">
+    <td *ngIf="columns[0].isVisible" class="text-center">{{ item.productId }}</td>
+    <td *ngIf="columns[1].isVisible" class="text-center">
       <input type="text" [(ngModel)]="selectedItem.productName" class="form-control" />
     </td>
-    <td class="text-center">
+    <td *ngIf="columns[2].isVisible" class="text-center">
       <input type="text" [(ngModel)]="selectedItem.price" class="form-control" />
     </td>
-    <td class="text-center">
+    <td *ngIf="columns[3].isVisible" class="text-center">
       <input id="item-{{ item.productId }}" type="checkbox" [checked]="item.isAvailable"
         [(ngModel)]="selectedItem.isAvailable" />
     </td>

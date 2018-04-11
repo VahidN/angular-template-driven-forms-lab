@@ -1,8 +1,6 @@
-export class AppProduct {
-  constructor(
-    public productId: number,
-    public productName: string,
-    public price: number,
-    public isAvailable: boolean
-  ) {}
+export interface AppProduct {
+  productId: number;
+  productName: string;
+  price: number;
+  isAvailable: boolean;
 }
