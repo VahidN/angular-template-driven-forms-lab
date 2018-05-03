@@ -21,6 +21,7 @@ import { LinqLikeMethodsModule } from "./linq-like-methods/linq-like-methods.mod
 import { ModalBootstrapDialogsModule } from "./modal-bootstrap-dialogs/modal-bootstrap-dialogs.module";
 import { ModelStateValidationModule } from "./model-state-validation/model-state-validation.module";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
+import { PostFormUrlencodedModule } from "./post-form-urlencoded/post-form-urlencoded.module";
 import { ProductModule } from "./product/product.module";
 import { ReadAppConfigModule } from "./read-app-config/read-app-config.module";
 import { SeoModule } from "./seo/seo.module";
@@ -64,6 +65,7 @@ import { WelcomeComponent } from "./welcome/welcome.component";
     BreadCrumbSampleModule,
     SeoModule,
     AutocompleteModule,
+    PostFormUrlencodedModule,
     AppRoutingModule
   ],
   providers: [
