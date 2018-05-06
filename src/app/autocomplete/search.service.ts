@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { ErrorObservable } from "rxjs/observable/ErrorObservable";
+import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
 @Injectable()
@@ -11,10 +10,10 @@ export class SearchService {
 
   searchCountries(term: string): Observable<string[]> {
     return this.http
-      .get(`/api/Typeahead/SearchCountries?term=${encodeURIComponent(term)}`)
+      .get<string[]>(`/api/Typeahead/SearchCountries?term=${encodeURIComponent(term)}`)
       .pipe(
         map(response => response || {}),
-        catchError((error: HttpErrorResponse) => ErrorObservable.create(error))
+        catchError((error: HttpErrorResponse) => throwError(error))
       );
   }
 }

@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { ErrorObservable } from "rxjs/observable/ErrorObservable";
+import { Observable, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
 
 @Injectable()
@@ -18,7 +17,7 @@ export class UrlencodedService {
     return this.http.post("/api/Urlencoded", body.toString(), { headers: headers })
       .pipe(
         map(response => response || {}),
-        catchError((error: HttpErrorResponse) => ErrorObservable.create(error))
+        catchError((error: HttpErrorResponse) => throwError(error))
       );
   }
 }

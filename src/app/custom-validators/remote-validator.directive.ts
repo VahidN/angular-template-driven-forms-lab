@@ -1,8 +1,9 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Directive, Input } from "@angular/core";
 import { AbstractControl, AsyncValidator, NG_ASYNC_VALIDATORS } from "@angular/forms";
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
+import { Observable, Subject, throwError as observableThrowError } from "rxjs";
+import { catchError, debounceTime, distinctUntilChanged, flatMap, take, takeUntil, tap } from "rxjs/operators";
+
 
 @Directive({
   selector:
@@ -24,11 +25,11 @@ export class RemoteValidatorDirective implements AsyncValidator {
 
   validate(control: AbstractControl): Observable<{ [key: string]: any }> {
     if (!this.remoteUrl || this.remoteUrl === undefined) {
-      return Observable.throw("`remoteUrl` is undefined.");
+      return observableThrowError("`remoteUrl` is undefined.");
     }
 
     if (!this.remoteField || this.remoteField === undefined) {
-      return Observable.throw("`remoteField` is undefined.");
+      return observableThrowError("`remoteField` is undefined.");
     }
 
     const dataObject: any = {};
@@ -50,21 +51,21 @@ export class RemoteValidatorDirective implements AsyncValidator {
     const changed$ = new Subject<any>();
     changed$.next(); // This will signal the previous stream (if any) to terminate.
 
-    const debounceTime = 400;
+    const debounceTimeValue = 400;
 
     return new Observable((obs: any) => {
-      control.valueChanges
-        .takeUntil(changed$)
-        .take(1)
-        .debounceTime(debounceTime)
-        .distinctUntilChanged()
-        .flatMap(term => {
+      control.valueChanges.pipe(
+        takeUntil(changed$),
+        take(1),
+        debounceTime(debounceTimeValue),
+        distinctUntilChanged(),
+        flatMap(term => {
           if (!this.remoteField || this.remoteField === undefined) {
-            return Observable.throw("`remoteField` is undefined.");
+            return observableThrowError("`remoteField` is undefined.");
           }
           dataObject[this.remoteField] = term;
           return this.doRemoteValidation(dataObject);
-        })
+        }))
         .subscribe(
           (result: IRemoteValidationResult) => {
             if (result.result) {
@@ -89,19 +90,19 @@ export class RemoteValidatorDirective implements AsyncValidator {
 
   private doRemoteValidation(data: any): Observable<IRemoteValidationResult> {
     if (!this.remoteUrl || this.remoteUrl === undefined) {
-      return Observable.throw("`remoteUrl` is undefined.");
+      return observableThrowError("`remoteUrl` is undefined.");
     }
 
     const headers = new HttpHeaders({ "Content-Type": "application/json" }); // for ASP.NET MVC
     return this.http
       .post<IRemoteValidationResult>(this.remoteUrl, JSON.stringify(data), {
         headers: headers
-      })
-      .do(result => console.log("remoteValidation result: ", result))
-      .catch((error: HttpErrorResponse) => {
-        console.error("observable error: ", error);
-        return Observable.throw(error.statusText);
-      });
+      }).pipe(
+        tap(result => console.log("remoteValidation result: ", result)),
+        catchError((error: HttpErrorResponse) => {
+          console.error("observable error: ", error);
+          return observableThrowError(error.statusText);
+        }));
   }
 }
 

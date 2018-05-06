@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-import { EmployeeRegisterComponent } from './employee-register/employee-register.component';
+import { EmployeeRegisterComponent } from "./employee-register/employee-register.component";
 
 const routes: Routes = [
-  { path: 'register', component: EmployeeRegisterComponent }
+  { path: "register", component: EmployeeRegisterComponent }
 ];
 
 @NgModule({

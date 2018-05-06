@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 import { IP } from "./ip";
+
 
 @Injectable()
 export class JobService {
@@ -11,13 +13,14 @@ export class JobService {
 
   getIpAddress(): Observable<IP> {
     return this.http
-      .get<IP>("https://freegeoip.net/json/?callback")
-      .map(response => response || {})
-      .catch(this.handleError);
+      .get<IP>("https://freegeoip.net/json/?callback").pipe(
+        map(response => response || {}),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
-    return Observable.throw(error);
+    return observableThrowError(error);
   }
 }

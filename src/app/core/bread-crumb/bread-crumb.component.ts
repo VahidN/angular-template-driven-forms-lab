@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from "@angular/core";
 import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
+import { distinctUntilChanged, filter, map } from "rxjs/operators";
 
 import { BreadCrumb } from "./bread-crumb";
 
@@ -21,9 +22,10 @@ export class BreadCrumbComponent implements OnInit {
 
   ngOnInit() {
     this.breadcrumbs$ = this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .distinctUntilChanged()
-      .map(event => event ? this.buildBreadCrumbs(this.activatedRoute.root) : []);
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        distinctUntilChanged(),
+        map(event => event ? this.buildBreadCrumbs(this.activatedRoute.root) : []));
   }
 
   buildBreadCrumbs(route: ActivatedRoute, url: string = "", breadcrumbs: Array<BreadCrumb> = []): Array<BreadCrumb> {

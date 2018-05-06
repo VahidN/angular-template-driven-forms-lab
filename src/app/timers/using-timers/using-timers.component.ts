@@ -1,13 +1,6 @@
-import "rxjs/add/observable/interval";
-import "rxjs/add/observable/never";
-import "rxjs/add/observable/timer";
-import "rxjs/add/operator/pluck";
-import "rxjs/add/operator/timeInterval";
-
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs/Observable";
-import { Subject } from "rxjs/Subject";
-import { Subscription } from "rxjs/Subscription";
+import { interval, NEVER, Subject, Subscription, timer } from "rxjs";
+import { finalize, map, pluck, switchMap, take, takeUntil, timeInterval } from "rxjs/operators";
 
 @Component({
   selector: "app-using-timers",
@@ -17,7 +10,7 @@ import { Subscription } from "rxjs/Subscription";
 export class UsingTimersComponent implements OnInit {
 
   private intervalSubscription: Subscription | null = null;
-  interval = 0;
+  intervalValue = 0;
   countdown = 0;
 
   tick = 0;
@@ -32,10 +25,12 @@ export class UsingTimersComponent implements OnInit {
   }
 
   startInterval() {
-    const interval = Observable.interval(1000);
-    this.intervalSubscription = interval
-      .finally(() => console.log("All done!"))
-      .subscribe(i => this.interval += i);
+    const intervalTimer = interval(1000);
+    this.intervalSubscription = intervalTimer
+      .pipe(
+        finalize(() => console.log("All done!"))
+      )
+      .subscribe(i => this.intervalValue += i);
   }
 
   stopInterval() {
@@ -45,20 +40,22 @@ export class UsingTimersComponent implements OnInit {
   }
 
   startCountdownTimer() {
-    const interval = 1000;
+    const intervalTimeValue = 1000;
     const duration = 10 * 1000;
-    const stream$ = Observable.timer(0, interval)
-      .finally(() => console.log("All done!"))
-      .takeUntil(Observable.timer(duration + interval))
-      .map(value => duration - value * interval);
+    const stream$ = timer(0, intervalTimeValue)
+      .pipe(
+        finalize(() => console.log("All done!")),
+        takeUntil(timer(duration + intervalTimeValue)),
+        map(value => duration - value * intervalTimeValue));
     stream$.subscribe(value => this.countdown = value);
   }
 
   testTimeInterval() {
-    const source = Observable.timer(0, 1000)
-      .timeInterval()
-      .map(x => x.value + ":" + x.interval)
-      .take(5);
+    const source = timer(0, 1000)
+      .pipe(
+        timeInterval(),
+        map(x => x.value + ":" + x.interval),
+        take(5));
 
     source.subscribe(
       x => console.log("Next timeInterval: " + x),
@@ -68,10 +65,11 @@ export class UsingTimersComponent implements OnInit {
   }
 
   testTimeIntervalWithPluck() {
-    const source = Observable.timer(0, 1000)
-      .timeInterval()
-      .pluck("interval")
-      .take(5);
+    const source = timer(0, 1000).
+      pipe(
+        timeInterval(),
+        pluck("interval"),
+        take(5));
 
     source.subscribe(
       x => console.log("Next interval: " + x),
@@ -81,11 +79,13 @@ export class UsingTimersComponent implements OnInit {
   }
 
   startTicker() {
-    Observable.timer(0, 1000)
+    timer(0, 1000)
       .subscribe(this.tickerSource);
 
     this.pauser
-      .switchMap(paused => paused ? Observable.never() : this.tickerSource).
+      .pipe(
+        switchMap(paused => paused ? NEVER : this.tickerSource)
+      ).
       subscribe((t: any) => this.tickerFunc(t));
 
     this.pauser.next(false); // resume

@@ -1,10 +1,12 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 import { AppProduct } from "./app-product";
 import { PagedQueryModel } from "./paged-query-model";
 import { PagedQueryResult } from "./paged-query-result";
+
 
 @Injectable()
 export class ProductsListService {
@@ -18,13 +20,13 @@ export class ProductsListService {
     return this.http
       .get<PagedQueryResult<AppProduct>>(
         `${this.baseUrl}/GetPagedProducts?${this.toQueryString(queryModel)}`
-      )
-      .map(result => {
-        return <PagedQueryResult<AppProduct>>{
-          totalItems: result.totalItems,
-          items: result.items
-        };
-      });
+      ).pipe(
+        map(result => {
+          return <PagedQueryResult<AppProduct>>{
+            totalItems: result.totalItems,
+            items: result.items
+          };
+        }));
   }
 
   toQueryString(obj: any): string {
@@ -42,7 +44,7 @@ export class ProductsListService {
 
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
-    return Observable.throw(error);
+    return observableThrowError(error);
   }
 
   addAppProduct(item: AppProduct): Observable<AppProduct> {
@@ -50,9 +52,9 @@ export class ProductsListService {
     return this.http
       .post<AppProduct>(`${this.baseUrl}/AddProduct`, JSON.stringify(item), {
         headers: header
-      })
-      .map(response => response || {})
-      .catch(this.handleError);
+      }).pipe(
+        map(response => response || {}),
+        catchError(this.handleError));
   }
 
   updateAppProduct(id: number, item: AppProduct): Observable<AppProduct> {
@@ -62,9 +64,9 @@ export class ProductsListService {
         `${this.baseUrl}/UpdateProduct/${id}`,
         JSON.stringify(item),
         { headers: header }
-      )
-      .map(response => response || {})
-      .catch(this.handleError);
+      ).pipe(
+        map(response => response || {}),
+        catchError(this.handleError));
   }
 
   deleteAppProduct(id: number): Observable<any> {

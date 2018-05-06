@@ -1,6 +1,7 @@
 ﻿import { Injectable } from "@angular/core";
-import { Title, Meta } from "@angular/platform-browser";
-import { Router, NavigationEnd, ActivatedRouteSnapshot } from "@angular/router";
+import { Meta, Title } from "@angular/platform-browser";
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from "@angular/router";
+import { distinctUntilChanged, filter } from "rxjs/operators";
 
 @Injectable()
 export class SeoService {
@@ -8,12 +9,12 @@ export class SeoService {
   constructor(private titleService: Title, private metaService: Meta, private router: Router) { }
 
   enableSeo() {
-    this.router.events
-      .filter(event => event instanceof NavigationEnd)
-      .distinctUntilChanged()
-      .subscribe(() => {
-        this.addMetaData(this.router.routerState.snapshot.root);
-      });
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.addMetaData(this.router.routerState.snapshot.root);
+    });
   }
 
   private addMetaData(root: ActivatedRouteSnapshot): void {

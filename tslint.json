@@ -1,16 +1,14 @@
 {
   "rulesDirectory": [
-    "node_modules/codelyzer"
+    "node_modules/codelyzer",
+    "node_modules/rxjs-tslint"
   ],
-  "extends": [
-    "rxjs-tslint-rules"
-  ],  
+  "extends": [],
   "rules": {
-    "rxjs-add": { "severity": "error" },
-    "rxjs-no-patched": { "severity": "error" },
-	"rxjs-no-unused-add": { "severity": "error" },
-    "rxjs-no-wholesale": { "severity": "error" },
-	"rxjs-no-subject-unsubscribe": { "severity": "error" },
+    "rxjs-collapse-imports": true,
+    "rxjs-pipeable-operators-only": true,
+    "rxjs-no-static-observable-methods": true,
+    "rxjs-proper-imports": true,
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,

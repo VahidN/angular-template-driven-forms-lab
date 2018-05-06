@@ -1,6 +1,7 @@
-﻿import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 @Injectable()
 export class CarService {
@@ -10,7 +11,8 @@ export class CarService {
   postData(): Observable<any> {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http.post("/api/values", { data: "123" }, { headers: headers })
-      .map((response: any) => response["fields"] || {})
-      .catch(error => Observable.throw(error));
+      .pipe(
+        map((response: any) => response["fields"] || {}),
+        catchError(error => observableThrowError(error)));
   }
 }

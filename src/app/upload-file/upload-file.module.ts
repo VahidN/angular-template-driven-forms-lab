@@ -1,15 +1,14 @@
-import { FormsModule } from "@angular/forms";
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
-import { UploadFileRoutingModule } from "./upload-file-routing.module";
-import { UploadFileSimpleComponent } from "./upload-file-simple/upload-file-simple.component";
-import { UploadFileSimpleService } from "./upload-file-simple.service";
-import { Ng2FileUploadTestComponent } from "./ng2-file-upload-test/ng2-file-upload-test.component";
-import { UploadFileWithProgressBarComponent } from "./upload-file-with-progress-bar/upload-file-with-progress-bar.component";
-
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 import { FileUploadModule } from "ng2-file-upload";
-import { UploadFileWithProgressBarService } from './upload-file-with-progress-bar.service';
+
+import { Ng2FileUploadTestComponent } from "./ng2-file-upload-test/ng2-file-upload-test.component";
+import { UploadFileRoutingModule } from "./upload-file-routing.module";
+import { UploadFileSimpleService } from "./upload-file-simple.service";
+import { UploadFileSimpleComponent } from "./upload-file-simple/upload-file-simple.component";
+import { UploadFileWithProgressBarService } from "./upload-file-with-progress-bar.service";
+import { UploadFileWithProgressBarComponent } from "./upload-file-with-progress-bar/upload-file-with-progress-bar.component";
 
 @NgModule({
   imports: [
@@ -25,4 +24,4 @@ import { UploadFileWithProgressBarService } from './upload-file-with-progress-ba
   ],
   providers: [UploadFileSimpleService, UploadFileWithProgressBarService]
 })
-export class UploadFileModule {}
+export class UploadFileModule { }

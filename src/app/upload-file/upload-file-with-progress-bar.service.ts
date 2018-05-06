@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 import { Ticket } from "./ticket";
+
 
 @Injectable()
 export class UploadFileWithProgressBarService {
@@ -12,7 +14,7 @@ export class UploadFileWithProgressBarService {
 
   postTicket(ticket: Ticket, filesList: FileList): Observable<HttpEvent<any>> {
     if (!filesList || filesList.length === 0) {
-      return Observable.throw("Please select a file.");
+      return observableThrowError("Please select a file.");
     }
 
     const formData: FormData = new FormData();
@@ -33,11 +35,11 @@ export class UploadFileWithProgressBarService {
         headers: headers,
         reportProgress: true,
         observe: "events"
-      })
-      .map(response => response || {})
-      .catch((error: HttpErrorResponse) => {
-        console.error("observable error: ", error);
-        return Observable.throw(error);
-      });
+      }).pipe(
+        map(response => response || {}),
+        catchError((error: HttpErrorResponse) => {
+          console.error("observable error: ", error);
+          return observableThrowError(error);
+        }));
   }
 }

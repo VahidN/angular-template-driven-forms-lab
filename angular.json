@@ -19,7 +19,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/client-config.json"
+              "src/assets/client-config.json"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
@@ -87,7 +87,7 @@
             "assets": [
               "src/assets",
               "src/favicon.ico",
-              "src/client-config.json"
+              "src/assets/client-config.json"
             ]
           }
         },
@@ -135,6 +135,11 @@
     },
     "@schematics/angular:directive": {
       "prefix": "app"
+    }
+  },
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false
     }
   }
 }

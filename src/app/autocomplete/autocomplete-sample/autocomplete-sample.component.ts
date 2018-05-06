@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { debounceTime, distinctUntilChanged, flatMap, switchMap } from "rxjs/operators";
-import { Subject } from "rxjs/Subject";
+import { Subject } from "rxjs";
 
 import { SearchService } from "./../search.service";
 

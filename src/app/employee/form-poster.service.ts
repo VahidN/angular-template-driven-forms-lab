@@ -1,8 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs/Observable";
+import { Observable, throwError as observableThrowError } from "rxjs";
+import { catchError, map } from "rxjs/operators";
 
 import { Employee } from "./employee";
+
 
 @Injectable()
 export class FormPosterService {
@@ -12,7 +14,7 @@ export class FormPosterService {
 
   private handleError(error: HttpErrorResponse): Observable<any> {
     console.error("observable error: ", error);
-    return Observable.throw(error);
+    return observableThrowError(error);
   }
 
   postEmployeeForm(employee: Employee): Observable<Employee> {
@@ -20,14 +22,16 @@ export class FormPosterService {
     const headers = new HttpHeaders({ "Content-Type": "application/json" });
     return this.http
       .post(this.baseUrl, body, { headers: headers })
-      .map((response: any) => response["fields"] || {})
-      .catch(this.handleError);
+      .pipe(
+        map((response: any) => response["fields"] || {}),
+        catchError(this.handleError));
   }
 
   getLanguages(): Observable<string[]> {
     return this.http
       .get<string[]>(`${this.baseUrl}/languages`)
-      .map(response => response || {})
-      .catch(this.handleError);
+      .pipe(
+        map(response => response || {}),
+        catchError(this.handleError));
   }
 }
