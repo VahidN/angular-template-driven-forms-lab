@@ -42,7 +42,8 @@ export class AppErrorHandler extends ErrorHandler {
     });
 
     if (error instanceof HttpErrorResponse) {
-      return `HTTP error [${error.error}] occurred at ${date}, message: ${error.message}, Status: ${(<HttpErrorResponse>error).status}: ${error.statusText}`;
+      return `HTTP error occurred at ${date}, ${error.message}, ${(<HttpErrorResponse>error).status}, ${error.statusText},
+       ${this.gerErrorDetails(error.error)}`;
     }
 
     if (error instanceof TypeError) {
@@ -54,6 +55,21 @@ export class AppErrorHandler extends ErrorHandler {
     }
 
     return `Some magical error occurred at ${date}, error - ${error}`;
+  }
+
+  gerErrorDetails(error: any): string {
+    const errors: string[] = [];
+    if (typeof error === "object" && error.constructor === Object) {
+      for (const fieldName in error) {
+        if (error.hasOwnProperty(fieldName)) {
+          const modelStateError = error[fieldName];
+          errors.push(`${fieldName}: ${modelStateError}`);
+        }
+      }
+    } else {
+      errors.push(error.toString());
+    }
+    return errors.join(", ");
   }
 
   getStackTrace(error: any): Promise<string> {
