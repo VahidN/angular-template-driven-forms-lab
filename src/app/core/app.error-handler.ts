@@ -42,7 +42,7 @@ export class AppErrorHandler extends ErrorHandler {
     });
 
     if (error instanceof HttpErrorResponse) {
-      return `HTTP error occurred at ${date}, message - ${error.message}, Status code - ${(<HttpErrorResponse>error).status}`;
+      return `HTTP error [${error.error}] occurred at ${date}, message: ${error.message}, Status: ${(<HttpErrorResponse>error).status}: ${error.statusText}`;
     }
 
     if (error instanceof TypeError) {
