@@ -37,8 +37,10 @@ export class AppErrorHandler extends ErrorHandler {
     const date = new Date().toISOString();
 
     this.getStackTrace(error).then(stackTrace => {
-      // TODO: log on the server --> { message, url, stackTrace }
+      // TODO: log it on the server --> { message, url, stackTrace }
       console.log("StackTrace", stackTrace);
+    }).catch(err => {
+      console.log("StackTrace Error", err);
     });
 
     if (error instanceof HttpErrorResponse) {
