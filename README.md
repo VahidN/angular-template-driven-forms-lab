@@ -48,6 +48,7 @@ This project is a collection of tips and tricks about how to use an Angular (2+)
 - How to use absolute paths for module imports.
 - How to reduce the quantity of call back executions needed.
 - How to post a url encoded form data to the server.
+- How to auto retry failed requests.
 
 How to run it
 -------------

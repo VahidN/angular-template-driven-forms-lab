@@ -8,6 +8,7 @@ import { AppErrorHandler } from "./app.error-handler";
 import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
 import { BrowserStorageService } from "./browser-storage.service";
 import { LoaderInterceptorService } from "./interceptors/loader-interceptor.service";
+import { RetryInterceptor } from "./interceptors/retry.interceptor";
 import { ModalService } from "./modal.service";
 import { SeoService } from "./seo-service";
 import { WindowRefService } from "./window.service";
@@ -30,6 +31,11 @@ import { WindowRefService } from "./window.service";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoaderInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RetryInterceptor,
       multi: true
     },
     {
