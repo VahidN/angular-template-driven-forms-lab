@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using AngularTemplateDrivenFormsLab.Utils;
+﻿using AngularTemplateDrivenFormsLab.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +16,7 @@ namespace AngularTemplateDrivenFormsLab
             services.AddMvc(options =>
             {
                 options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-            });
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
