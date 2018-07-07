@@ -11,6 +11,19 @@
   </div>
   <div class="modal-body">
     This is a modal.
+    <form #uploadForm="ngForm" (submit)="submitUpload()" novalidate>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label">Select files:</label>
+          <div>
+            <input required #fileInput2 type="file" multiple (change)="fileChange($event)" class="form-control">
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-primary" type="button" (click)="submitUpload()">Submit</button>
+        </div>
+      </fieldset>
+    </form>
   </div>
 </ng-template>
 

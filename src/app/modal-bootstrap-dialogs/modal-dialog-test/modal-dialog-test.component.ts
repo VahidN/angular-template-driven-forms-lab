@@ -14,6 +14,9 @@ export class ModalDialogTestComponent implements OnInit {
   modalRef: BsModalRef | null = null;
   confirmResult: string | null = null;
 
+  private filesList: FileList | null = null;
+  private fileInput2: HTMLInputElement | null = null;
+
   constructor(
     private bsModalService: BsModalService,
     private modalService: ModalService) { }
@@ -51,5 +54,20 @@ export class ModalDialogTestComponent implements OnInit {
           this.confirmResult = "Canceled!";
         }
       });
+  }
+
+  fileChange(event: any) {
+    this.filesList = event.target.files;
+    this.fileInput2 = event.target as HTMLInputElement;
+    console.log("fileChange() -> filesList", this.filesList);
+    console.log("fileChange() -> this.fileInput2.files", this.fileInput2.files);
+  }
+
+  submitUpload() {
+    console.log("filesList", this.filesList);
+    if (this.fileInput2) {
+      console.log("fileInput2", this.fileInput2.files);
+    }
+
   }
 }
