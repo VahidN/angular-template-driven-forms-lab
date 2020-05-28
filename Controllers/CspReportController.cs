@@ -1,53 +1,54 @@
 using System.IO;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 namespace AngularTemplateDrivenFormsLab.Controllers
 {
     class CspPost
     {
-        [JsonProperty("csp-report")]
+        [JsonPropertyName("csp-report")]
         public CspReport CspReport { get; set; }
     }
 
     class CspReport
     {
-        [JsonProperty("document-uri")]
+        [JsonPropertyName("document-uri")]
         public string DocumentUri { get; set; }
 
-        [JsonProperty("referrer")]
+        [JsonPropertyName("referrer")]
         public string Referrer { get; set; }
 
-        [JsonProperty("violated-directive")]
+        [JsonPropertyName("violated-directive")]
         public string ViolatedDirective { get; set; }
 
-        [JsonProperty("effective-directive")]
+        [JsonPropertyName("effective-directive")]
         public string EffectiveDirective { get; set; }
 
-        [JsonProperty("original-policy")]
+        [JsonPropertyName("original-policy")]
         public string OriginalPolicy { get; set; }
 
-        [JsonProperty("disposition")]
+        [JsonPropertyName("disposition")]
         public string Disposition { get; set; }
 
-        [JsonProperty("blocked-uri")]
+        [JsonPropertyName("blocked-uri")]
         public string BlockedUri { get; set; }
 
-        [JsonProperty("line-number")]
+        [JsonPropertyName("line-number")]
         public int LineNumber { get; set; }
 
-        [JsonProperty("column-number")]
+        [JsonPropertyName("column-number")]
         public int ColumnNumber { get; set; }
 
-        [JsonProperty("source-file")]
+        [JsonPropertyName("source-file")]
         public string SourceFile { get; set; }
 
-        [JsonProperty("status-code")]
+        [JsonPropertyName("status-code")]
         public string StatusCode { get; set; }
 
-        [JsonProperty("script-sample")]
+        [JsonPropertyName("script-sample")]
         public string ScriptSample { get; set; }
     }
 
@@ -82,7 +83,7 @@ namespace AngularTemplateDrivenFormsLab.Controllers
             {
                 var body = await bodyReader.ReadToEndAsync().ConfigureAwait(false);
                 this.HttpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(body));
-                cspPost = JsonConvert.DeserializeObject<CspPost>(body);
+                cspPost = JsonSerializer.Deserialize<CspPost>(body);
             }
 
             //TODO: log cspPost

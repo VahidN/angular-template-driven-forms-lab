@@ -9,8 +9,8 @@ namespace AngularTemplateDrivenFormsLab.Controllers
     [Route("api/[controller]")]
     public class SimpleUploadController : Controller
     {
-        private readonly IHostingEnvironment _environment;
-        public SimpleUploadController(IHostingEnvironment environment)
+        private readonly IWebHostEnvironment _environment;
+        public SimpleUploadController(IWebHostEnvironment environment)
         {
             _environment = environment;
         }
